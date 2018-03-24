@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Yatzee</string>
+    <string name="first_roll">Roll</string>
+    <string name="other_roll">Roll again</string>
 </resources>

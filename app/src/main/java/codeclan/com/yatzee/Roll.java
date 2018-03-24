@@ -60,17 +60,18 @@ public class Roll {
         this.dice.clear();
     }
 
-    public void firstFullRollOfDice() {
+    public ArrayList<Dice> firstFullRollOfDice() {
         this.increaseRollCount();
         for (int i = 0; i < 5; i++) {
             addDieToDice();
         }
+        return dice;
     }
 
 
-    public void reRollDice() {
+    public ArrayList<Dice> reRollDice() {
         if (this.rollCount == 3) {
-            return;
+            return dice;
         }
         this.increaseRollCount();
         for (int i = 0; i < 5; i++) {
@@ -78,6 +79,7 @@ public class Roll {
                 dice.set(i, getRandomDice());
             }
         }
+        return dice;
     }
 
 

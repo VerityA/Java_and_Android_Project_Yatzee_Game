@@ -5,19 +5,26 @@ package codeclan.com.yatzee;
  */
 
 public enum DiceType {
-    ONE(1),
-    TWO(2),
-    THREE(3),
-    FOUR(4),
-    FIVE(5);
+    ONE(1, "dice_one"),
+    TWO(2, "dice_two"),
+    THREE(3, "dice_three"),
+    FOUR(4, "dice_four"),
+    FIVE(5, "dice_five"),
+    SIX(6, "dice_six");
 
     private int value;
+    private String image;
 
-     DiceType(int value){
+     DiceType(int value, String image){
         this.value = value;
+        this.image = image;
     }
 
     public int getValue() {
         return value;
+    }
+
+    public String getImage() {
+         return image;
     }
 }
