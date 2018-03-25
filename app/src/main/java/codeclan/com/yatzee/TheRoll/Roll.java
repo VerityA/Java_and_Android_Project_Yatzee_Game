@@ -1,12 +1,12 @@
-package codeclan.com.yatzee.Roll;
+package codeclan.com.yatzee.TheRoll;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
-import codeclan.com.yatzee.Dice.Dice;
-import codeclan.com.yatzee.Dice.DiceType;
+import codeclan.com.yatzee.Dices.Dice;
+import codeclan.com.yatzee.Dices.DiceType;
 
 /**
  * Created by user on 23/03/2018.

@@ -1,4 +1,4 @@
-package codeclan.com.yatzee.ScoreButtons;
+package codeclan.com.yatzee.TheScoreButtons;
 
 /**
  * Created by user on 25/03/2018.

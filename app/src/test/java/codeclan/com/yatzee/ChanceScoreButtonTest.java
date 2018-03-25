@@ -4,21 +4,21 @@ import org.junit.Before;
 import org.junit.Test;
 
 import codeclan.com.yatzee.TheRoll.Roll;
-import codeclan.com.yatzee.TheScoreButtons.OfAKindScoreButton;
+import codeclan.com.yatzee.TheScoreButtons.ChanceScoreButton;
 import codeclan.com.yatzee.TheScoreButtons.Strategy;
 
 /**
  * Created by user on 25/03/2018.
  */
 
-public class OfAKindScoreButtonTest {
+public class ChanceScoreButtonTest {
 
-    OfAKindScoreButton ofAKindScoreButton;
+    ChanceScoreButton chanceScoreButton;
     Roll roll;
 
     @Before
     public void before() {
-        ofAKindScoreButton = new OfAKindScoreButton(Strategy.THREEOFAKIND);
+        chanceScoreButton = new ChanceScoreButton(Strategy.CHANCE);
     }
 
     @Test
@@ -26,7 +26,6 @@ public class OfAKindScoreButtonTest {
         roll = new Roll();
         roll.firstFullRollOfDice();
         System.out.println(roll.getDiceRollValues());
-        System.out.println(ofAKindScoreButton.calculateScore(roll));
+        System.out.println(chanceScoreButton.calculateScore(roll));
     }
-
 }

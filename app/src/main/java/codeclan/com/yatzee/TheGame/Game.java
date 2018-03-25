@@ -1,7 +1,7 @@
-package codeclan.com.yatzee.Game;
+package codeclan.com.yatzee.TheGame;
 
-import codeclan.com.yatzee.Player.Player;
-import codeclan.com.yatzee.Roll.Roll;
+import codeclan.com.yatzee.Players.Player;
+import codeclan.com.yatzee.TheRoll.Roll;
 
 /**
  * Created by user on 23/03/2018.

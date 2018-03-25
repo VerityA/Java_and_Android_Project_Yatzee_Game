@@ -3,8 +3,8 @@ package codeclan.com.yatzee;
 import org.junit.Before;
 import org.junit.Test;
 
-import codeclan.com.yatzee.Dice.Dice;
-import codeclan.com.yatzee.Roll.Roll;
+import codeclan.com.yatzee.Dices.Dice;
+import codeclan.com.yatzee.TheRoll.Roll;
 
 import static org.junit.Assert.assertEquals;
 

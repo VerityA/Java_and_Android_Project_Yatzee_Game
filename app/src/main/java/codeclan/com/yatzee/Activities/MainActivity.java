@@ -10,11 +10,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import codeclan.com.yatzee.Dice.Dice;
-import codeclan.com.yatzee.Game.Game;
-import codeclan.com.yatzee.Player.Player;
+import codeclan.com.yatzee.Dices.Dice;
+import codeclan.com.yatzee.TheGame.Game;
+import codeclan.com.yatzee.Players.Player;
 import codeclan.com.yatzee.R;
-import codeclan.com.yatzee.Roll.Roll;
+import codeclan.com.yatzee.TheRoll.Roll;
 
 public class MainActivity extends AppCompatActivity {
 
