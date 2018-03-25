@@ -1,4 +1,4 @@
-package codeclan.com.yatzee;
+package codeclan.com.yatzee.Player;
 
 /**
  * Created by user on 23/03/2018.
@@ -7,10 +7,10 @@ package codeclan.com.yatzee;
 public class Player {
 
     private Integer score;
-    private boolean activePlayer;
+    private Boolean activePlayer;
     private int turnsTaken;
 
-    public Player(boolean activePlayer) {
+    public Player(Boolean activePlayer) {
         this.score = 0;
         this.activePlayer = activePlayer;
         this.turnsTaken = 0;
@@ -24,7 +24,7 @@ public class Player {
         return score;
     }
 
-    public boolean isActivePlayer() {
+    public Boolean isActivePlayer() {
         return activePlayer;
     }
 

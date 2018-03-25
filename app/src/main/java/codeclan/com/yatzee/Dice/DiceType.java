@@ -1,4 +1,4 @@
-package codeclan.com.yatzee;
+package codeclan.com.yatzee.Dice;
 
 /**
  * Created by user on 23/03/2018.

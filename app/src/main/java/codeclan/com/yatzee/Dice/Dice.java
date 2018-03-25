@@ -1,4 +1,4 @@
-package codeclan.com.yatzee;
+package codeclan.com.yatzee.Dice;
 
 /**
  * Created by user on 23/03/2018.
@@ -21,6 +21,7 @@ public class Dice {
     public Boolean isHeld() {
         return isHeld;
     }
+
 
     public int getValueOfDice() {
         return this.diceType.getValue();

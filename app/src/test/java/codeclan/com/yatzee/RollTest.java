@@ -3,6 +3,9 @@ package codeclan.com.yatzee;
 import org.junit.Before;
 import org.junit.Test;
 
+import codeclan.com.yatzee.Dice.Dice;
+import codeclan.com.yatzee.Roll.Roll;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -65,7 +68,37 @@ public class RollTest {
         assertEquals(5, roll.getDiceRollValues().size());
     }
 
+    @Test
+    public void canSeeIfDiceRollContainsAValue() {
+        roll.firstFullRollOfDice();
+        System.out.println(roll.getDiceRollValues());
+        System.out.println(roll.doesDiceContainDieValue(1));
+        System.out.println(roll.doesDiceContainDieValue(2));
+        System.out.println(roll.doesDiceContainDieValue(3));
+        System.out.println(roll.doesDiceContainDieValue(4));
+        System.out.println(roll.doesDiceContainDieValue(5));
+        System.out.println(roll.doesDiceContainDieValue(6));
+    }
 
+    @Test
+    public void canCalculateOccurrencesOfDieValue() {
+        roll.firstFullRollOfDice();
+        System.out.println(roll.getDiceRollValues());
+        System.out.println(roll.frequencyOfDieValue(1));
+        System.out.println(roll.frequencyOfDieValue(2));
+        System.out.println(roll.frequencyOfDieValue(3));
+        System.out.println(roll.frequencyOfDieValue(4));
+        System.out.println(roll.frequencyOfDieValue(5));
+        System.out.println(roll.frequencyOfDieValue(6));
+
+    }
+
+    @Test
+    public void canSeeIfManyOfAKindPresent() {
+        roll.firstFullRollOfDice();
+        System.out.println(roll.getDiceRollValues());
+        System.out.println(roll.doesContainMultipleOfAnyDieValue(3));
+    }
 
     @Test
     public void canReRollDiceNoDiceHeld() {

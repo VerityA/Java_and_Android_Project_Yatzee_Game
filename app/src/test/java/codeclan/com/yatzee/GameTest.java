@@ -3,6 +3,8 @@ package codeclan.com.yatzee;
 import org.junit.Before;
 import org.junit.Test;
 
+import codeclan.com.yatzee.Game.Game;
+
 /**
  * Created by user on 23/03/2018.
  */

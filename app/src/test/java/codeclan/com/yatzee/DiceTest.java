@@ -3,6 +3,9 @@ package codeclan.com.yatzee;
 import org.junit.Before;
 import org.junit.Test;
 
+import codeclan.com.yatzee.Dice.Dice;
+import codeclan.com.yatzee.Dice.DiceType;
+
 import static org.junit.Assert.assertEquals;
 
 /**

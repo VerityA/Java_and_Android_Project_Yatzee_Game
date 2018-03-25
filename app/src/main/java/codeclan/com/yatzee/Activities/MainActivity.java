@@ -1,17 +1,20 @@
-package codeclan.com.yatzee;
+package codeclan.com.yatzee.Activities;
 
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
+import codeclan.com.yatzee.Dice.Dice;
+import codeclan.com.yatzee.Game.Game;
+import codeclan.com.yatzee.Player.Player;
+import codeclan.com.yatzee.R;
+import codeclan.com.yatzee.Roll.Roll;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     private Game game;
     private Roll roll;
     private ArrayList<Dice> dice;
+
+    private Player player1;
+    private Player player2;
 
     private TextView playerOneText;
     private TextView playerTwoText;
@@ -67,6 +73,9 @@ public class MainActivity extends AppCompatActivity {
         playerTwoText = findViewById(R.id.player2_text);
         playerOneText.setBackgroundColor(Color.GRAY);
 
+        player1 = game.getPlayer1();
+        player2 = game.getPlayer2();
+
     }
 
 
@@ -88,11 +97,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onRollButtonClick(View rollClickView) {
-
         if (game.getActivePlayer().getTurnsTaken() == 1) {
             return;
         }
-        else if (game.getRoll().getRollCount() == 0) {
+
+
+        else if (roll.getRollCount() == 0) {
                 dice = roll.firstFullRollOfDice();
         }
         else {
@@ -117,12 +127,12 @@ public class MainActivity extends AppCompatActivity {
 
         Button playButton = findViewById(R.id.play_button);
         if (playButton.getText() == getString(R.string.play_again)) {
-            game.getPlayer1().setScore(0);
-            game.getPlayer2().setScore(0);
-            playerOneScore.setText(game.getPlayer1().getScore().toString());
-            playerTwoScore.setText(game.getPlayer2().getScore().toString());
-            game.getPlayer1().setTurnsTaken(0);
-            game.getPlayer2().setTurnsTaken(0);
+            player1.setScore(0);
+            player2.setScore(0);
+            playerOneScore.setText(player1.getScore().toString());
+            playerTwoScore.setText(player2.getScore().toString());
+            player1.setTurnsTaken(0);
+            player2.setTurnsTaken(0);
             roll.resetRollCount();
             rollButton.setText(R.string.first_roll);
             playButton.setText(R.string.play);
@@ -132,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        game.getActivePlayer().increaseTurnsTaken();
+       game.getActivePlayer().increaseTurnsTaken();
 
         if (roll.getRollCount() == 0) {
             return;
@@ -150,16 +160,13 @@ public class MainActivity extends AppCompatActivity {
 
         rollButton.setText(R.string.first_roll);
 
-        playerOneScore.setText(game.getPlayer1().getScore().toString());
-        playerTwoScore.setText(game.getPlayer2().getScore().toString());
+        playerOneScore.setText(player1.getScore().toString());
+        playerTwoScore.setText(player2.getScore().toString());
 
-        Log.d("player 1 score: ", game.getPlayer1().getScore().toString());
-        Log.d("player 2 score: ", game.getPlayer2().getScore().toString());
+        player1.changeActivePlayerStatus();
+        player2.changeActivePlayerStatus();
 
-        game.getPlayer1().changeActivePlayerStatus();
-        game.getPlayer2().changeActivePlayerStatus();
-
-        if (game.getPlayer1().isActivePlayer() == true ) {
+        if (player1 == game.getActivePlayer() ) {
             playerTwoText.setBackgroundColor(0);
             playerOneText.setBackgroundColor(Color.GRAY);
         }
@@ -168,16 +175,16 @@ public class MainActivity extends AppCompatActivity {
             playerTwoText.setBackgroundColor(Color.GRAY);
         }
 
-        if (game.getPlayer1().getTurnsTaken() + game.getPlayer2().getTurnsTaken() == 2) {
+        if (player1.getTurnsTaken() + player2.getTurnsTaken() == 2) {
 
                 playButton.setText(R.string.play_again);
                 playerOneText.setBackgroundColor(0);
                 playerTwoText.setBackgroundColor(0);
                 winningMessage = findViewById(R.id.winner_msg);
-                if (game.getPlayer1().getScore() == game.getPlayer2().getScore()) {
+                if (player1.getScore() == player2.getScore()) {
                     winningMessage.setText(R.string.draw);
                 }
-                else if(game.getPlayer1().getScore() > game.getPlayer2().getScore()) {
+                else if(player1.getScore() > player2.getScore()) {
                     winningMessage.setText(R.string.player1_win);
                 }
                 else {

@@ -3,6 +3,8 @@ package codeclan.com.yatzee;
 import org.junit.Before;
 import org.junit.Test;
 
+import codeclan.com.yatzee.Player.Player;
+
 import static org.junit.Assert.assertEquals;
 
 /**
