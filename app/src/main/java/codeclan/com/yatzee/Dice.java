@@ -7,7 +7,7 @@ package codeclan.com.yatzee;
 public class Dice {
 
     private DiceType diceType;
-    private boolean isHeld;
+    private Boolean isHeld;
 
     public Dice(DiceType diceType) {
         this.diceType = diceType;
@@ -18,7 +18,7 @@ public class Dice {
         return diceType;
     }
 
-    public boolean isHeld() {
+    public Boolean isHeld() {
         return isHeld;
     }
 

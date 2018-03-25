@@ -14,6 +14,9 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         android:background="@android:drawable/checkbox_off_background"
+        android:filterTouchesWhenObscured="false"
+        android:focusableInTouchMode="false"
+        android:onClick="onDiceButtonClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,6 +29,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:background="@android:drawable/checkbox_off_background"
+        android:onClick="onDiceButtonClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dice_button_one"
         app:layout_constraintTop_toTopOf="parent"
@@ -38,6 +42,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:background="@android:drawable/checkbox_off_background"
+        android:onClick="onDiceButtonClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dice_button_two"
         app:layout_constraintTop_toTopOf="parent"
@@ -50,6 +55,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:background="@android:drawable/checkbox_off_background"
+        android:onClick="onDiceButtonClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dice_button_three"
         app:layout_constraintTop_toTopOf="parent"
@@ -63,7 +69,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:background="@android:drawable/checkbox_off_background"
-        android:onClick="onRollButtonClick"
+        android:onClick="onDiceButtonClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -84,4 +90,85 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.089"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/play_button"
+        android:layout_width="167dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:onClick="onPlayButtonClick"
+        android:text="Play"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/roll_button" />
+
+    <TextView
+        android:id="@+id/player1_text"
+        android:layout_width="96dp"
+        android:layout_height="61dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="88dp"
+        android:text="@string/player1_score"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/player1_score"
+        android:layout_width="94dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="88dp"
+        android:text="TextView"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/player2_text"
+        android:layout_width="95dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="88dp"
+        android:text="@string/player2_score"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/player1_score"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/player2_score"
+        android:layout_width="79dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="88dp"
+        android:text="TextView"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/winner_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/dice_button_three"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/player1_score"
+        app:layout_constraintVertical_bias="0.086" />
+
 </android.support.constraint.ConstraintLayout>

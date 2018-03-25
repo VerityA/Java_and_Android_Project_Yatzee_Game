@@ -6,15 +6,21 @@ package codeclan.com.yatzee;
 
 public class Player {
 
-    private int score;
+    private Integer score;
     private boolean activePlayer;
+    private int turnsTaken;
 
     public Player(boolean activePlayer) {
         this.score = 0;
         this.activePlayer = activePlayer;
+        this.turnsTaken = 0;
     }
 
-    public int getScore() {
+    public Integer getTurnsTaken() {
+        return turnsTaken;
+    }
+
+    public Integer getScore() {
         return score;
     }
 
@@ -26,6 +32,10 @@ public class Player {
         this.score += points;
     }
 
+    public void increaseTurnsTaken() {
+        this.turnsTaken += 1;
+    }
+
     public void changeActivePlayerStatus() {
         if (this.isActivePlayer() == false) {
             this.activePlayer = true;
@@ -33,5 +43,13 @@ public class Player {
         else {
             this.activePlayer = false;
         }
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public void setTurnsTaken(int turnsTaken) {
+        this.turnsTaken = turnsTaken;
     }
 }

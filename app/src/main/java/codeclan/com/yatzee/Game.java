@@ -24,6 +24,15 @@ public class Game {
         return player2;
     }
 
+    public Player getActivePlayer() {
+        if (player1.isActivePlayer() == true) {
+            return player1;
+        }
+        else  {
+            return player2;
+        }
+    }
+
     public Roll getRoll() {
         return roll;
     }

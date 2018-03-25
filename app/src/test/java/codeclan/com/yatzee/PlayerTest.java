@@ -20,8 +20,9 @@ public class PlayerTest {
 
     @Test
     public void canIncreasePlayerScore() {
+        assertEquals(0, player.getScore().intValue());
         player.increasePlayerScore(25);
-        assertEquals(25, player.getScore());
+        assertEquals(25, player.getScore().intValue());
     }
 
     @Test
@@ -30,4 +31,12 @@ public class PlayerTest {
         player.changeActivePlayerStatus();
         assertEquals(false, player.isActivePlayer());
     }
+
+    @Test
+    public void canIncreasePlayerTurns() {
+        player.increaseTurnsTaken();
+        assertEquals(1,player.getTurnsTaken().intValue());
+    }
+
+
 }
