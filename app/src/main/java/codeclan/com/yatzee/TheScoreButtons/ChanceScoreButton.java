@@ -6,7 +6,7 @@ import codeclan.com.yatzee.TheRoll.Roll;
  * Created by user on 25/03/2018.
  */
 
-public class ChanceScoreButton extends ScoreButtons {
+public class ChanceScoreButton extends ScoreButton {
 
     private Integer scoreValue;
 

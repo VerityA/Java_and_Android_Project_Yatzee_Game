@@ -13,6 +13,7 @@ public class Game {
     private Player player2;
     private Roll roll;
 
+
     public Game() {
         this.player1 = new Player(true);
         this.player2 =  new Player(false);

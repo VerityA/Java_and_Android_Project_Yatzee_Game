@@ -4,11 +4,11 @@ package codeclan.com.yatzee.TheScoreButtons;
  * Created by user on 25/03/2018.
  */
 
-public abstract class ScoreButtons implements IScorePoints {
+public abstract class ScoreButton implements IScorePoints {
     private Strategy strategyType;
     private int scoreValue;
 
-    public ScoreButtons(Strategy strategyType) {
+    public ScoreButton(Strategy strategyType) {
         this.strategyType = strategyType;
         this.scoreValue = 0;
     }

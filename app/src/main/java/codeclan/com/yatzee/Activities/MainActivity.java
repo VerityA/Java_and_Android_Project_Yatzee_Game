@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         diceButtons.add(diceFour);
         diceButtons.add(diceFive);
 
-        playerOneScore = findViewById(R.id.player1_score);
+        playerOneScore = findViewById(R.id.player2_score);
         playerOneScore.setText(game.getPlayer1().getScore().toString());
 
         playerTwoScore = findViewById(R.id.player2_score);

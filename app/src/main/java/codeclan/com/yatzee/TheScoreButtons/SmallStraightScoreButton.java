@@ -6,7 +6,7 @@ import codeclan.com.yatzee.TheRoll.Roll;
  * Created by user on 25/03/2018.
  */
 
-public class SmallStraightScoreButton extends ScoreButtons {
+public class SmallStraightScoreButton extends ScoreButton {
 
     private int scoreValue;
 

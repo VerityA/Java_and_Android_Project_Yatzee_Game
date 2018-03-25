@@ -111,7 +111,6 @@
         android:layout_height="61dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="88dp"
         android:text="@string/player1_score"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -120,11 +119,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/player1_score"
+        android:id="@+id/player2_score"
         android:layout_width="94dp"
         android:layout_height="60dp"
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginStart="116dp"
         android:text="TextView"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -135,19 +133,18 @@
         android:layout_width="95dp"
         android:layout_height="60dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="88dp"
         android:text="@string/player2_score"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/player1_score"
+        app:layout_constraintStart_toEndOf="@+id/player2_score"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/player2_score"
         android:layout_width="79dp"
         android:layout_height="54dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginEnd="16dp"
         android:text="TextView"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -168,7 +165,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player1_score"
+        app:layout_constraintTop_toBottomOf="@+id/player2_score"
         app:layout_constraintVertical_bias="0.086" />
+
+    <ListView
+        android:id="@+id/score_list"
+        android:layout_width="368dp"
+        android:layout_height="261dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="69dp" />
 
 </android.support.constraint.ConstraintLayout>
