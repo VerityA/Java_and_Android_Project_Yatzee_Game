@@ -16,7 +16,7 @@ public class LowerScoreButton extends ScoreButton {
     }
 
     @Override
-    public int calculateScore(Roll roll) {
+    public Integer calculateScore(Roll roll) {
         int strategyValue = getStrategyType().getValue();
         return roll.frequencyOfDieValue(strategyValue) * strategyValue;
     }

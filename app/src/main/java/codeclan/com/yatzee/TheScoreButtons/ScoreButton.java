@@ -6,22 +6,33 @@ package codeclan.com.yatzee.TheScoreButtons;
 
 public abstract class ScoreButton implements IScorePoints {
     private Strategy strategyType;
-    private int scoreValue;
+    private Integer scoreValue;
+//    private Integer p2ScoreValue;
 
     public ScoreButton(Strategy strategyType) {
         this.strategyType = strategyType;
-        this.scoreValue = 0;
+        this.scoreValue = null;
+//        this.p2ScoreValue = null;
     }
 
     public Strategy getStrategyType() {
         return strategyType;
     }
 
-    public int getScoreValue() {
+    public Integer getScoreValue() {
         return scoreValue;
     }
 
-    public void setScoreValue(int scoreValue) {
+//    public Integer getP2ScoreValue() {
+//        return p2ScoreValue;
+//    }
+
+    public void setScoreValue(Integer scoreValue) {
         this.scoreValue = scoreValue;
     }
+
+//    public void setP2ScoreValue(Integer scoreValue) {
+//
+//    }
+
 }

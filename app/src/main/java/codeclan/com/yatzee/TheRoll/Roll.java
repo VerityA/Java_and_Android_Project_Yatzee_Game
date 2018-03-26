@@ -54,6 +54,11 @@ public class Roll {
 
     public ArrayList<Integer> getDiceRollValues() {
         ArrayList<Integer> arrayOfDiceValues = new ArrayList<>();
+
+        if(dice.size() == 0) {
+            return arrayOfDiceValues;
+        }
+
         for (int i = 0; i < 5; i++) {
             arrayOfDiceValues.add(dice.get(i).getValueOfDice());
         }

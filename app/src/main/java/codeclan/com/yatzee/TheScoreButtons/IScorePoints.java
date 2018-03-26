@@ -7,5 +7,5 @@ import codeclan.com.yatzee.TheRoll.Roll;
  */
 
 public interface IScorePoints {
-    int calculateScore(Roll roll);
+    Integer calculateScore(Roll roll);
 }

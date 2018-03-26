@@ -16,7 +16,7 @@ public class FullHouseScoreButton extends ScoreButton {
     }
 
     @Override
-    public int calculateScore(Roll roll) {
+    public Integer calculateScore(Roll roll) {
         if (roll.doesContainMultipleOfAnyDieValue(3)) {
             if (roll.doesContainMultipleOfAnyDieValue(2)) {
                 return 25;

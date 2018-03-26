@@ -16,7 +16,7 @@ public class OfAKindScoreButton extends ScoreButton {
     }
 
     @Override
-    public int calculateScore(Roll roll) {
+    public Integer calculateScore(Roll roll) {
         if (roll.doesContainMultipleOfAnyDieValue(getStrategyType().getValue())) {
             return roll.sumOfAllDiceValues();
         }

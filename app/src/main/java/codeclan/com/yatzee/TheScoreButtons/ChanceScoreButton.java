@@ -16,7 +16,7 @@ public class ChanceScoreButton extends ScoreButton {
     }
 
     @Override
-    public int calculateScore(Roll roll) {
+    public Integer calculateScore(Roll roll) {
         return roll.sumOfAllDiceValues();
     }
 }

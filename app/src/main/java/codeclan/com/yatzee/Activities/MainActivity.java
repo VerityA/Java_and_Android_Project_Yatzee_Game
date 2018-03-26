@@ -3,9 +3,11 @@ package codeclan.com.yatzee.Activities;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,6 +17,10 @@ import codeclan.com.yatzee.TheGame.Game;
 import codeclan.com.yatzee.Players.Player;
 import codeclan.com.yatzee.R;
 import codeclan.com.yatzee.TheRoll.Roll;
+import codeclan.com.yatzee.TheScoreButtons.AllScoreButtons;
+import codeclan.com.yatzee.TheScoreButtons.ScoreButton;
+import codeclan.com.yatzee.TheScoreButtons.ScoreButtonAdaptor;
+import codeclan.com.yatzee.TheScoreButtons.Strategy;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
     private TextView playerOneScore;
     private TextView playerTwoScore;
 
+    private boolean hasPlayerSelectedScored;
+    private Strategy previouslySelectedScore;
+
+    private ArrayList<ScoreButton> scoreButtonList;
+
+
     private TextView winningMessage;
 
     @Override
@@ -47,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         game = new Game();
+        this.hasPlayerSelectedScored = false;
         roll = game.getRoll();
         dice = new ArrayList<>();
 
@@ -63,10 +76,10 @@ public class MainActivity extends AppCompatActivity {
         diceButtons.add(diceFour);
         diceButtons.add(diceFive);
 
-        playerOneScore = findViewById(R.id.player2_score);
+        playerOneScore = findViewById(R.id.player1_total_score);
         playerOneScore.setText(game.getPlayer1().getScore().toString());
 
-        playerTwoScore = findViewById(R.id.player2_score);
+        playerTwoScore = findViewById(R.id.player2_total_score);
         playerTwoScore.setText(game.getPlayer2().getScore().toString());
 
         playerOneText = findViewById(R.id.player1_text);
@@ -76,27 +89,41 @@ public class MainActivity extends AppCompatActivity {
         player1 = game.getPlayer1();
         player2 = game.getPlayer2();
 
+        AllScoreButtons scoreButtons = new AllScoreButtons();
+        scoreButtonList = scoreButtons.getScoreButtons();
+        refreshList();
+
+    }
+
+    public void refreshList() {
+        ScoreButtonAdaptor buttonAdaptor = new ScoreButtonAdaptor(this, scoreButtonList);
+        ListView buttonListView = findViewById(R.id.score_list);
+        buttonListView.setAdapter(buttonAdaptor);
     }
 
 
     public void onDiceButtonClick(View diceClickView) {
-        ImageButton diceButton = findViewById(diceClickView.getId());
+
+        ImageButton diceButton = (ImageButton) diceClickView; // findViewById(diceClickView.getId());
         diceButton.clearColorFilter();
 
         Dice die = (Dice) diceClickView.getTag();
         die.changeHeldStatus();
 
-        ImageButton clickedDiceButton = findViewById(diceClickView.getId());
+//        ImageButton clickedDiceButton = findViewById(diceClickView.getId());
 
         if( die.isHeld() == true) {
-            clickedDiceButton.setColorFilter(R.color.grey_out);
+            diceButton.setColorFilter(R.color.grey_out);
         }
     }
 
 
 
 
+
     public void onRollButtonClick(View rollClickView) {
+        Log.e("test: ", "working?");
+
         if (game.getActivePlayer().getTurnsTaken() == 1) {
             return;
         }
@@ -122,8 +149,78 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void onP1ScoreButtonClick(View buttonListView) {
+
+        if(!hasPlayerSelectedScored) {
+            Log.d("button click test:", "hello");
+            ScoreButton selectedP1Score = (ScoreButton) buttonListView.getTag();
+
+            ScoreButton scoreButton = null;
+
+            for(ScoreButton button : scoreButtonList) {
+                if(button.getStrategyType() == selectedP1Score.getStrategyType()) {
+                    scoreButton = button;
+                }
+            }
+
+            Log.d("test button: ", selectedP1Score.getStrategyType().toString());
+
+            Integer p1Score = scoreButton.calculateScore(roll);
+            scoreButton.setScoreValue(p1Score);
+            hasPlayerSelectedScored = true;
+            previouslySelectedScore = selectedP1Score.getStrategyType();
+
+            Log.e("Derp", "I selected: " + previouslySelectedScore);
+        } else {
+            ScoreButton scoreButton = null;
+
+            for(ScoreButton button : scoreButtonList) {
+                if(button.getStrategyType() == previouslySelectedScore) {
+                    scoreButton = button;
+                }
+            }
+
+            scoreButton.setScoreValue(null);
+
+            Log.d("button click test:", "hello");
+            ScoreButton selectedP1Score = (ScoreButton) buttonListView.getTag();
+
+            Log.d("test button: ", selectedP1Score.getStrategyType().toString());
+
+            Integer p1Score = selectedP1Score.calculateScore(roll);
+
+            for(ScoreButton button : scoreButtonList) {
+                if(button.getStrategyType() == selectedP1Score.getStrategyType()) {
+                    scoreButton = button;
+                }
+            }
+
+            scoreButton.setScoreValue(p1Score);
+
+            previouslySelectedScore = selectedP1Score.getStrategyType();
+
+            Log.e("Derp", "I selected: " + previouslySelectedScore);
+            /*
+                Find previous scoreButton from arraylist using strategy method
+                Update integer to be 0 or null
+
+             */
+        }
+
+        refreshList();
+    }
+
+    public void onP2ScoreButtonClick(View buttonListView) {
+
+    }
+
+
 
     public void onPlayButtonClick(View playClickLView) {
+
+        Log.d("testing p1 turns taken", player1.getTurnsTaken().toString());
+        Log.d("testing p2 turns taken", player2.getTurnsTaken().toString());
+        hasPlayerSelectedScored = false;
 
         Button playButton = findViewById(R.id.play_button);
         if (playButton.getText() == getString(R.string.play_again)) {

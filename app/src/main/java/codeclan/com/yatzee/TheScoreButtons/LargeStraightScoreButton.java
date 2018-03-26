@@ -16,7 +16,7 @@ public class LargeStraightScoreButton extends ScoreButton {
     }
 
     @Override
-    public int calculateScore(Roll roll) {
+    public Integer calculateScore(Roll roll) {
         if (roll.doesContainAFullStraight()) {
             return 40;
         }
