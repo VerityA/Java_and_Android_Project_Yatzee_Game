@@ -131,4 +131,9 @@ public class RollTest {
         System.out.println(roll.getDiceRollValues());
     }
 
+    @Test
+    public void canDetectASmallStraight() {
+        roll.doesContainASmallStraight();
+    }
+
 }

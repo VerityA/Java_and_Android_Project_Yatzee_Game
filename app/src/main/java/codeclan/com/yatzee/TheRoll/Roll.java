@@ -134,11 +134,12 @@ public class Roll {
         ArrayList<Integer> smallStraight2 = new ArrayList<>(Arrays.asList(2,3,4,5));
         ArrayList<Integer> smallStraight3 = new ArrayList<>(Arrays.asList(3,4,5,6));
 
+
         int sstotal1 = 0;
         int sstotal2 = 0;
         int sstotal3 = 0;
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 4; i++) {
             if (this.getDiceRollValues().contains(smallStraight1.get(i))) {
                 sstotal1 += 1;
             }

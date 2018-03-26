@@ -8,16 +8,21 @@ import codeclan.com.yatzee.TheRoll.Roll;
 
 public class OfAKindScoreButton extends ScoreButton {
 
-    private int scoreValue;
+    private int p1ScoreValue;
+    private int p2ScoreValue;
 
     public OfAKindScoreButton(Strategy strategyType) {
         super(strategyType);
-        this.scoreValue = 0;
+        this.p1ScoreValue = 0;
+        this.p2ScoreValue = 0;
     }
 
     @Override
     public Integer calculateScore(Roll roll) {
         if (roll.doesContainMultipleOfAnyDieValue(getStrategyType().getValue())) {
+            if (getStrategyType().getValue() == 5) {
+                return 50;
+            }
             return roll.sumOfAllDiceValues();
         }
         return 0;

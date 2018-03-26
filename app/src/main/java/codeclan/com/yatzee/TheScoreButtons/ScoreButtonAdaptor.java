@@ -44,22 +44,23 @@ public class ScoreButtonAdaptor extends ArrayAdapter {
         Button p1ScoreButton = viewList.findViewById(R.id.player1_score);
 
 
-        if(scoreButton.getScoreValue() == null) {
+        if(scoreButton.getP1ScoreValue() == null) {
             p1ScoreButton.setText(null);
         } else {
-            p1ScoreButton.setText(scoreButton.getScoreValue().toString());
+            p1ScoreButton.setText(scoreButton.getP1ScoreValue().toString());
         }
 
         Button p2ScoreButton = viewList.findViewById(R.id.player2_score);
 
-//        if(scoreButton.getP2ScoreValue() == null) {
-//            p1ScoreButton.setText(null);
-//        } else {
-//            p1ScoreButton.setText(scoreButton.getP2ScoreValue().toString());
-//        }
+        if(scoreButton.getP2ScoreValue() == null) {
+            p2ScoreButton.setText(null);
+        } else {
+            p2ScoreButton.setText(scoreButton.getP2ScoreValue().toString());
+        }
 
         p1ScoreButton.setTag(scoreButton);
         p2ScoreButton.setTag(scoreButton);
+
 
         return viewList;
     }

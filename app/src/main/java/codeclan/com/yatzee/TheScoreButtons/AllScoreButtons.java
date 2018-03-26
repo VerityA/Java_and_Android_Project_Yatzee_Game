@@ -1,6 +1,9 @@
 package codeclan.com.yatzee.TheScoreButtons;
 
+import java.net.Inet4Address;
 import java.util.ArrayList;
+
+import codeclan.com.yatzee.Players.Player;
 
 /**
  * Created by user on 26/03/2018.
@@ -9,8 +12,12 @@ import java.util.ArrayList;
 public class AllScoreButtons {
 
     private ArrayList<ScoreButton> scoreButtons;
+    private Player player1;
+    private Player player2;
 
     public AllScoreButtons() {
+        player1 = new Player(true);
+        player2 = new Player(false);
         scoreButtons = new ArrayList<>();
 
         scoreButtons.add(new LowerScoreButton(Strategy.ONES));
@@ -35,5 +42,25 @@ public class AllScoreButtons {
 
     public ArrayList<ScoreButton> getScoreButtons() {
         return scoreButtons;
+    }
+
+    public ArrayList<Integer> getP1Scores() {
+        ArrayList<Integer> p1Scores = new ArrayList<>();
+
+        for (ScoreButton scoreButton : scoreButtons) {
+            Integer p1Score = scoreButton.getP1ScoreValue();
+            p1Scores.add(p1Score);
+        }
+        return p1Scores;
+    }
+
+    public ArrayList<Integer> getP2Scores() {
+        ArrayList<Integer> p2Scores = new ArrayList<>();
+
+        for (ScoreButton scoreButton : scoreButtons) {
+            Integer p2Score = scoreButton.getP2ScoreValue();
+            p2Scores.add(p2Score);
+        }
+        return p2Scores;
     }
 }

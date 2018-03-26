@@ -8,11 +8,13 @@ import codeclan.com.yatzee.TheRoll.Roll;
 
 public class ChanceScoreButton extends ScoreButton {
 
-    private Integer scoreValue;
+    private Integer p1ScoreValue;
+    private Integer p2ScoreValue;
 
     public ChanceScoreButton(Strategy strategyType) {
         super(strategyType);
-        this.scoreValue = 0;
+        this.p1ScoreValue = 0;
+        this.p2ScoreValue = 0;
     }
 
     @Override

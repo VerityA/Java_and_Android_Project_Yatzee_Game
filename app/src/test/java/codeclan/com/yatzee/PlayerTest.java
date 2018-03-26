@@ -64,7 +64,7 @@ public class PlayerTest {
         System.out.println(strategyMap);
         assertEquals(null, strategyMap.get(chanceScoreButton.getStrategyType()));
         player.setScoreMapValue(chanceScoreButton.getStrategyType(), chanceScoreButton.calculateScore(roll));
-        assertEquals(chanceScoreButton.calculateScore(roll),strategyMap.get(chanceScoreButton.getStrategyType()).intValue());
+        assertEquals(chanceScoreButton.calculateScore(roll).intValue(),strategyMap.get(chanceScoreButton.getStrategyType()).intValue());
         System.out.println(strategyMap);
     }
 

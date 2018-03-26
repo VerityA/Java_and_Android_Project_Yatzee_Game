@@ -8,11 +8,13 @@ import codeclan.com.yatzee.TheRoll.Roll;
 
 public class FullHouseScoreButton extends ScoreButton {
 
-    private int scoreValue;
+    private int p1ScoreValue;
+    private int p2ScoreValue;
 
     public FullHouseScoreButton(Strategy strategyType) {
         super(strategyType);
-        this.scoreValue = 0;
+        this.p1ScoreValue = 0;
+        this.p2ScoreValue = 0;
     }
 
     @Override

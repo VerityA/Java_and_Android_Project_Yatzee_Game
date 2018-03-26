@@ -1,7 +1,10 @@
 package codeclan.com.yatzee.Players;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import codeclan.com.yatzee.TheScoreButtons.AllScoreButtons;
+import codeclan.com.yatzee.TheScoreButtons.ScoreButton;
 import codeclan.com.yatzee.TheScoreButtons.Strategy;
 
 /**
@@ -10,13 +13,14 @@ import codeclan.com.yatzee.TheScoreButtons.Strategy;
 
 public class Player {
 
-    private Integer score;
+    private Integer totalScore;
     private Boolean activePlayer;
     private int turnsTaken;
     private HashMap<Strategy, Integer> scoreMap;
 
+
     public Player(Boolean activePlayer) {
-        this.score = 0;
+        this.totalScore = 0;
         this.activePlayer = activePlayer;
         this.turnsTaken = 0;
         this.scoreMap = new HashMap<>();
@@ -27,7 +31,7 @@ public class Player {
     }
 
     public Integer getScore() {
-        return score;
+        return totalScore;
     }
 
     public Boolean isActivePlayer() {
@@ -35,7 +39,7 @@ public class Player {
     }
 
     public void increasePlayerScore(int points) {
-        this.score += points;
+        this.totalScore += points;
     }
 
     public void increaseTurnsTaken() {
@@ -51,9 +55,15 @@ public class Player {
         }
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void resetScore() {
+        this.totalScore = 0;
     }
+
+    public void setTotalScore(int score) {
+        this.totalScore = score;
+    }
+
+
 
     public void setTurnsTaken(int turnsTaken) {
         this.turnsTaken = turnsTaken;
