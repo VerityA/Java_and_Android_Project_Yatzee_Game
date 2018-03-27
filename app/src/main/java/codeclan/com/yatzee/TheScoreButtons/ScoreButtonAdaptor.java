@@ -1,6 +1,7 @@
 package codeclan.com.yatzee.TheScoreButtons;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,31 @@ public class ScoreButtonAdaptor extends ArrayAdapter {
         strategyImage.setImageResource(resIDImage);
 
         Button p1ScoreButton = viewList.findViewById(R.id.player1_score);
+
+//        ArrayList<Strategy> lowerScoreStrategies = new ArrayList<>();
+//        lowerScoreStrategies.add(Strategy.ONES);
+//        lowerScoreStrategies.add(Strategy.TWOS);
+//        lowerScoreStrategies.add(Strategy.THREES);
+//        lowerScoreStrategies.add(Strategy.FOURS);
+//        lowerScoreStrategies.add(Strategy.FIVES);
+//        lowerScoreStrategies.add(Strategy.SIXES);
+
+        String colour = scoreButton.getStrategyType().getColour();
+        Log.d("test colour", scoreButton.getStrategyType().getColour());
+        Integer resIDColour = getContext().getResources().getIdentifier(colour, "color", getContext().getPackageName());
+
+        //21300001
+        //21200004
+
+        Log.d("res Id", resIDColour.toString());
+        Log.d("darker green", "color: " + R.color.darker_green);
+
+
+
+        viewList.setBackgroundColor( getContext().getResources().getColor(resIDColour) );
+//        if (lowerScoreStrategies.contains(scoreButton.getStrategyType()) )
+//        {viewList.setBackgroundColor(R.color.pale_green);}
+
 
 
         if(scoreButton.getP1ScoreValue() == null) {

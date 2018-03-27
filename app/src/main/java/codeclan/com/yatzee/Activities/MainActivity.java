@@ -1,6 +1,7 @@
 package codeclan.com.yatzee.Activities;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -22,6 +24,7 @@ import codeclan.com.yatzee.TheScoreButtons.ScoreButton;
 import codeclan.com.yatzee.TheScoreButtons.ScoreButtonAdaptor;
 import codeclan.com.yatzee.TheScoreButtons.Strategy;
 
+import static java.lang.Integer.TYPE;
 import static java.lang.Integer.max;
 import static java.lang.Math.min;
 
@@ -98,7 +101,9 @@ public class MainActivity extends AppCompatActivity {
 
         playerOneText = findViewById(R.id.player1_text);
         playerTwoText = findViewById(R.id.player2_text);
-        playerOneText.setBackgroundColor(Color.GRAY);
+
+        playerOneText.setTextSize(24);
+        playerOneText.setTypeface(null, Typeface.BOLD);
 
         player1 = game.getPlayer1();
         player2 = game.getPlayer2();
@@ -114,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
         ListView buttonListView = findViewById(R.id.score_list);
 
         buttonAdaptor = new ScoreButtonAdaptor(this, scoreButtonList);
+
         buttonListView.setAdapter(buttonAdaptor);
 
         rollButton = findViewById(R.id.roll_button);
@@ -150,7 +156,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onRollButtonClick(View rollClickView) {
-        playButton.setEnabled(true);
+//        playButton.setEnabled();
+//        if (!hasPlayerSelectedScored) {playButton.setEnabled(false);}
 
         int rollNumber = min(roll.getRollCount() + 2, 3);
         String rollNumberMsg = getString(R.string.first_roll, rollNumber);
@@ -188,11 +195,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+        if (roll.doesContainMultipleOfAnyDieValue(5)) {
+            Toast.makeText(this, R.string.yatzee, Toast.LENGTH_SHORT).show();
+        }
+
+
 //        rollButton.setText(R.string.other_roll);
 
     }
 
     public void onP1ScoreButtonClick(View buttonListView) {
+        playButton.setEnabled(true);
+
         Log.d("has been rolled test", hasDiceBeenRolled.toString());
         if (!hasDiceBeenRolled || !player1.isActivePlayer()) { return;}
 
@@ -252,6 +266,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onP2ScoreButtonClick(View buttonListView) {
+        playButton.setEnabled(true);
+
         Log.d("has been rolled test", hasDiceBeenRolled.toString());
         if (!hasDiceBeenRolled || !player2.isActivePlayer()) { return;}
 
@@ -307,6 +323,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onPlayButtonClick(View playClickLView) {
+
+
+
 //        refreshList();
         Log.d("active player? : ", game.getActivePlayer().toString());
         Log.d("player1 active? : ", game.getPlayer1().isActivePlayer().toString());
@@ -330,8 +349,8 @@ public class MainActivity extends AppCompatActivity {
             roll.resetRollCount();
             rollButton.setText(R.string.first_roll);
             playButton.setText(R.string.play);
-            playerOneText.setBackgroundColor(Color.GRAY);
-            playerTwoText.setBackgroundColor(0);
+//            playerOneText.setBackgroundColor(Color.GRAY);
+//            playerTwoText.setBackgroundColor(0);
 //            winningMessage.setText(null);
             return;
         }
@@ -364,32 +383,57 @@ public class MainActivity extends AppCompatActivity {
         player1.changeActivePlayerStatus();
         player2.changeActivePlayerStatus();
 
+        View player1Display = findViewById(R.id.rectangle_player1);
+        View player2Display = findViewById(R.id.rectangle_player2);
+
+
+        Integer resIDYellow = getResources().getIdentifier("yellow", "color", getPackageName());
+        Integer resIDGrey = getResources().getIdentifier("grey", "color", getPackageName());
+
         if (player1 == game.getActivePlayer() ) {
-            playerTwoText.setBackgroundColor(0);
-            playerOneText.setBackgroundColor(Color.GRAY);
+            player1Display.setBackgroundColor(Color.YELLOW);
+            player2Display.setBackgroundColor(Color.LTGRAY);
+            playerOneText.setTextSize(30);
+            playerOneText.setTypeface(null, Typeface.BOLD);
+            playerTwoText.setTextSize(18);
+            playerTwoText.setTypeface(null, Typeface.NORMAL);
+//            playerOneText.setBackgroundColor(Color.GRAY);
         }
         else {
-            playerOneText.setBackgroundColor(0);
-            playerTwoText.setBackgroundColor(Color.GRAY);
+            player1Display.setBackgroundColor(Color.LTGRAY);
+            player2Display.setBackgroundColor(Color.YELLOW);
+            playerTwoText.setTextSize(30);
+            playerTwoText.setTypeface(null, Typeface.BOLD);
+            playerOneText.setTextSize(18);
+            playerOneText.setTypeface(null, Typeface.NORMAL);
+//            playerOneText.setBackgroundColor(0);
+//            playerTwoText.setBackgroundColor(Color.GRAY);
         }
 
         if (player1.getTurnsTaken() + player2.getTurnsTaken() == 26) {
 
+            player1Display.setBackgroundColor(0);
+            player2Display.setBackgroundColor(0);
+            playerOneText.setText("");
+            playerTwoText.setText("");
+            playerOneScore.setText("");
+            playerTwoScore.setText("");
+
                 playButton.setText(R.string.play_again);
-                playerOneText.setBackgroundColor(0);
-                playerTwoText.setBackgroundColor(0);
+//                playerOneText.setBackgroundColor(0);
+//                playerTwoText.setBackgroundColor(0);
 
 
-//                winningMessage = findViewById(R.id.winner_msg);
-//                if (player1.getScore() == player2.getScore()) {
-//                    winningMessage.setText(R.string.draw);
-//                }
-//                else if(player1.getScore() > player2.getScore()) {
-//                    winningMessage.setText(R.string.player1_win);
-//                }
-//                else {
-//                    winningMessage.setText(R.string.player2_win);
-//                }
+                winningMessage = findViewById(R.id.winner_msg);
+                if (player1.getScore() == player2.getScore()) {
+                    winningMessage.setText(R.string.draw);
+                }
+                else if(player1.getScore() > player2.getScore()) {
+                    winningMessage.setText(R.string.player1_win);
+                }
+                else {
+                    winningMessage.setText(R.string.player2_win);
+                }
 
 
             }

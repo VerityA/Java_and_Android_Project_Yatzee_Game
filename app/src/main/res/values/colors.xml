@@ -5,4 +5,8 @@
     <color name="colorAccent">#ff4081</color>
     <color name="grey_out">#8080777a</color>
     <color name="grey_removed">#9980777a</color>
+    <color name="pale_green">#f3f10937</color>
+    <color name="darker_green">#9963a34a</color>
+    <color name="yellow">#d3d937</color>
+    <color name="grey">#DDDDDD</color>
 </resources>

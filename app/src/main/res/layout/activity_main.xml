@@ -7,20 +7,37 @@
     tools:context="codeclan.com.yatzee.Activities.MainActivity">
 
     <View
-        android:id="@+id/rectangle_at_the_top"
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:layout_alignParentTop="true"
+        android:id="@+id/rectangle_player2"
+        android:layout_width="210dp"
+        android:layout_height="65dp"
         android:background="#DDDDDD"
-        android:visibility="visible" />
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/rectangle_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <View
+        android:id="@+id/rectangle_player1"
+        android:layout_width="206dp"
+        android:layout_height="68dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="8dp"
+        android:background="#d3d937"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/rectangle_title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="0dp" />
 
     <View
         android:id="@+id/rectangle_title"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="39dp"
         android:layout_alignParentTop="true"
         android:background="#d44e4e"
         android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/score_list"
         app:layout_constraintTop_toBottomOf="@+id/rectangle_at_the_top"
         tools:layout_editor_absoluteX="8dp" />
 
@@ -46,14 +63,12 @@
         tools:layout_editor_absoluteX="0dp" />
 
 
-
     <ImageButton
         android:id="@+id/dice_button_one"
         android:layout_width="75dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="11dp"
+        android:layout_marginStart="15dp"
         android:background="@android:drawable/checkbox_off_background"
         android:filterTouchesWhenObscured="false"
         android:focusableInTouchMode="false"
@@ -67,7 +82,7 @@
         android:id="@+id/dice_button_two"
         android:layout_width="77dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="11dp"
         android:layout_marginTop="8dp"
         android:background="@android:drawable/checkbox_off_background"
         android:onClick="onDiceButtonClick"
@@ -80,7 +95,7 @@
         android:id="@+id/dice_button_three"
         android:layout_width="77dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="11dp"
         android:layout_marginTop="8dp"
         android:background="@android:drawable/checkbox_off_background"
         android:onClick="onDiceButtonClick"
@@ -93,7 +108,7 @@
         android:id="@+id/dice_button_four"
         android:layout_width="75dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="11dp"
         android:layout_marginTop="8dp"
         android:background="@android:drawable/checkbox_off_background"
         android:onClick="onDiceButtonClick"
@@ -106,53 +121,53 @@
         android:id="@+id/dice_button_five"
         android:layout_width="77dp"
         android:layout_height="80dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="11dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:background="@android:drawable/checkbox_off_background"
         android:onClick="onDiceButtonClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toEndOf="@+id/dice_button_four"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.889" />
 
     <Button
         android:id="@+id/roll_button"
-        android:layout_width="141dp"
-        android:layout_height="59dp"
+        android:layout_width="237dp"
+        android:layout_height="58dp"
         android:layout_marginBottom="4dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="-4dp"
         android:onClick="onRollButtonClick"
         android:text="@string/first_roll"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.188"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/play_button"
-        android:layout_width="141dp"
-        android:layout_height="59dp"
+        android:layout_width="122dp"
+        android:layout_height="58dp"
         android:layout_marginBottom="4dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="15dp"
         android:layout_marginStart="8dp"
         android:onClick="onPlayButtonClick"
         android:text="@string/play"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toEndOf="@+id/roll_button" />
 
     <TextView
         android:id="@+id/player1_total_score"
         android:layout_width="74dp"
         android:layout_height="42dp"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="168dp"
         android:text="TextView"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -160,9 +175,9 @@
 
     <TextView
         android:id="@+id/player2_text"
-        android:layout_width="95dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="120dp"
+        android:layout_width="132dp"
+        android:layout_height="61dp"
+        android:layout_marginEnd="52dp"
         android:text="@string/player2_score"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -170,9 +185,8 @@
 
     <TextView
         android:id="@+id/player2_total_score"
-        android:layout_width="62dp"
+        android:layout_width="53dp"
         android:layout_height="42dp"
-        android:layout_marginEnd="40dp"
         android:text="TextView"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -180,27 +194,12 @@
         app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--<TextView-->
-    <!--android:id="@+id/winner_msg"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginBottom="8dp"-->
-    <!--android:layout_marginEnd="8dp"-->
-    <!--android:layout_marginStart="8dp"-->
-    <!--android:layout_marginTop="40dp"-->
-    <!--android:textSize="36sp"-->
-    <!--app:layout_constraintBottom_toTopOf="@+id/dice_button_three"-->
-    <!--app:layout_constraintEnd_toEndOf="parent"-->
-    <!--app:layout_constraintHorizontal_bias="0.501"-->
-    <!--app:layout_constraintStart_toStartOf="parent"-->
-    <!--app:layout_constraintTop_toBottomOf="@+id/player1_total_score"-->
-    <!--app:layout_constraintVertical_bias="0.086" />-->
-
     <ListView
         android:id="@+id/score_list"
         android:layout_width="wrap_content"
         android:layout_height="353dp"
-        android:layout_marginTop="8dp"
+        android:divider="#DDDDDD"
+        android:dividerHeight="8px"
         app:layout_constraintBottom_toTopOf="@+id/dice_button_three"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -210,8 +209,8 @@
 
     <TextView
         android:id="@+id/player1_text"
-        android:layout_width="72dp"
-        android:layout_height="wrap_content"
+        android:layout_width="144dp"
+        android:layout_height="62dp"
         android:layout_marginStart="16dp"
         android:text="@string/player1_score"
         android:textSize="18sp"
@@ -221,10 +220,11 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="17dp"
         android:layout_marginEnd="40dp"
         android:layout_marginTop="76dp"
         android:text="@string/player1"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -235,7 +235,23 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="76dp"
         android:text="@string/player2"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/winner_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="388dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/dice_button_three"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
