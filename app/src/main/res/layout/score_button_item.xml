@@ -8,36 +8,43 @@
     <ImageView
         android:id="@+id/strategy_image"
         android:layout_width="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/chance"/>
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        app:srcCompat="@drawable/chance" />
 
     <TextView
         android:id="@+id/strategy_name"
         android:layout_width="wrap_content"
-        android:layout_toRightOf="@id/strategy_image"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/strategy_image"
         android:text="TextView"
-        android:textSize="24sp"/>
-
-
+        android:textSize="20sp" />
 
 
     <Button
         android:id="@+id/player2_score"
-        android:layout_width="80dp"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
         android:layout_alignParentEnd="true"
-        android:layout_height="49dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:onClick="onP2ScoreButtonClick"
-        android:text="Button" />
+        android:text="Button"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/player1_score"
-        android:layout_width="80dp"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
         android:layout_toLeftOf="@id/player2_score"
-        android:layout_height="49dp"
         android:onClick="onP1ScoreButtonClick"
-        android:text="Button" />
+        android:text="Button"
+        android:textSize="18sp" />
 
 
 

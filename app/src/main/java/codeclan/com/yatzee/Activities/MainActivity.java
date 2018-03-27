@@ -22,6 +22,9 @@ import codeclan.com.yatzee.TheScoreButtons.ScoreButton;
 import codeclan.com.yatzee.TheScoreButtons.ScoreButtonAdaptor;
 import codeclan.com.yatzee.TheScoreButtons.Strategy;
 
+import static java.lang.Integer.max;
+import static java.lang.Math.min;
+
 public class MainActivity extends AppCompatActivity {
 
     private ImageButton diceOne;
@@ -57,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
     private ListView buttonListView;
     private Integer currentPositionIndex;
     ScoreButtonAdaptor buttonAdaptor;
+
+    private Button playButton;
 
 
     private TextView winningMessage;
@@ -111,6 +116,12 @@ public class MainActivity extends AppCompatActivity {
         buttonAdaptor = new ScoreButtonAdaptor(this, scoreButtonList);
         buttonListView.setAdapter(buttonAdaptor);
 
+        rollButton = findViewById(R.id.roll_button);
+        int rollNumber = 1;
+        rollButton.setText(getString(R.string.first_roll, rollNumber));
+        playButton = findViewById(R.id.play_button);
+        playButton.setEnabled(false);
+
 //        refreshList();
 
     }
@@ -139,6 +150,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onRollButtonClick(View rollClickView) {
+        playButton.setEnabled(true);
+
+        int rollNumber = min(roll.getRollCount() + 2, 3);
+        String rollNumberMsg = getString(R.string.first_roll, rollNumber);
+        String rollFinished = getString(R.string.finished_roll);
+        Log.d("finished? :", rollFinished);
+
+        rollButton.setText(rollNumberMsg);
+
+        if (roll.getRollCount() >= 2) {
+            rollButton.setText(rollFinished);
+            rollButton.setEnabled(false);
+        }
         hasDiceBeenRolled = true;
 
         Log.e("test: ", "working?");
@@ -163,8 +187,8 @@ public class MainActivity extends AppCompatActivity {
             diceButtons.get(i).setTag(dice.get(i));
         }
 
-        rollButton = findViewById(R.id.roll_button);
-        rollButton.setText(R.string.other_roll);
+
+//        rollButton.setText(R.string.other_roll);
 
     }
 
@@ -295,7 +319,7 @@ public class MainActivity extends AppCompatActivity {
 
         hasPlayerSelectedScored = false;
 
-        Button playButton = findViewById(R.id.play_button);
+
         if (playButton.getText() == getString(R.string.play_again)) {
             player1.resetScore();
             player2.resetScore();
@@ -371,7 +395,11 @@ public class MainActivity extends AppCompatActivity {
             }
         hasDiceBeenRolled = false;
 
+        int rollNumber = min(roll.getRollCount() + 1, 3);
+        rollButton.setText(getString(R.string.first_roll, rollNumber));
 
+        rollButton.setEnabled(true);
+        playButton.setEnabled(false);
 
         }
 

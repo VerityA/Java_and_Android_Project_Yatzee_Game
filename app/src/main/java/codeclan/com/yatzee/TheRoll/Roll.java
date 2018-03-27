@@ -14,7 +14,7 @@ import codeclan.com.yatzee.Dices.DiceType;
 
 public class Roll {
 
-    private int rollCount;
+    private Integer rollCount;
     private ArrayList<Dice> dice;
 
     public Roll() {
@@ -22,7 +22,7 @@ public class Roll {
         this.dice = new ArrayList<>();
     }
 
-    public int getRollCount() {
+    public Integer getRollCount() {
         return rollCount;
     }
 

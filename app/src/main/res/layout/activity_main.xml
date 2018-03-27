@@ -6,12 +6,53 @@
     android:layout_height="match_parent"
     tools:context="codeclan.com.yatzee.Activities.MainActivity">
 
+    <View
+        android:id="@+id/rectangle_at_the_top"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_alignParentTop="true"
+        android:background="#DDDDDD"
+        android:visibility="visible" />
+
+    <View
+        android:id="@+id/rectangle_title"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:background="#d44e4e"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@+id/rectangle_at_the_top"
+        tools:layout_editor_absoluteX="8dp" />
+
+    <View
+        android:id="@+id/rectangle_dice_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="79dp"
+        android:layout_alignParentBottom="true"
+        android:background="#1c5e16"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/rectangle_roll_play_buttons"
+        app:layout_constraintTop_toBottomOf="@+id/score_list"
+        tools:layout_editor_absoluteX="100dp" />
+
+    <View
+        android:id="@+id/rectangle_roll_play_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_alignParentBottom="true"
+        android:background="#d44e4e"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+
+
     <ImageButton
         android:id="@+id/dice_button_one"
         android:layout_width="75dp"
         android:layout_height="80dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="72dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:background="@android:drawable/checkbox_off_background"
         android:filterTouchesWhenObscured="false"
@@ -20,21 +61,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.776" />
+        app:layout_constraintVertical_bias="0.891" />
 
     <ImageButton
         android:id="@+id/dice_button_two"
         android:layout_width="77dp"
         android:layout_height="80dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@android:drawable/checkbox_off_background"
         android:onClick="onDiceButtonClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dice_button_one"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.776" />
+        app:layout_constraintVertical_bias="0.891" />
 
     <ImageButton
         android:id="@+id/dice_button_three"
@@ -47,21 +87,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dice_button_two"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.776" />
+        app:layout_constraintVertical_bias="0.889" />
 
     <ImageButton
         android:id="@+id/dice_button_four"
         android:layout_width="75dp"
         android:layout_height="80dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@android:drawable/checkbox_off_background"
         android:onClick="onDiceButtonClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dice_button_three"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.776" />
+        app:layout_constraintVertical_bias="0.889" />
 
     <ImageButton
         android:id="@+id/dice_button_five"
@@ -74,37 +113,39 @@
         android:onClick="onDiceButtonClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.089"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/dice_button_four"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.776" />
+        app:layout_constraintVertical_bias="0.889" />
 
     <Button
         android:id="@+id/roll_button"
-        android:layout_width="167dp"
-        android:layout_height="64dp"
-        android:layout_marginBottom="68dp"
+        android:layout_width="141dp"
+        android:layout_height="59dp"
+        android:layout_marginBottom="4dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:onClick="onRollButtonClick"
         android:text="@string/first_roll"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.136"
+        app:layout_constraintHorizontal_bias="0.188"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/play_button"
-        android:layout_width="167dp"
-        android:layout_height="64dp"
-        android:layout_marginBottom="68dp"
+        android:layout_width="141dp"
+        android:layout_height="59dp"
+        android:layout_marginBottom="4dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:onClick="onPlayButtonClick"
-        android:text="Play"
+        android:text="@string/play"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toEndOf="@+id/roll_button" />
 
     <TextView
@@ -140,25 +181,25 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <!--<TextView-->
-        <!--android:id="@+id/winner_msg"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginTop="40dp"-->
-        <!--android:textSize="36sp"-->
-        <!--app:layout_constraintBottom_toTopOf="@+id/dice_button_three"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintHorizontal_bias="0.501"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/player1_total_score"-->
-        <!--app:layout_constraintVertical_bias="0.086" />-->
+    <!--android:id="@+id/winner_msg"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="8dp"-->
+    <!--android:layout_marginEnd="8dp"-->
+    <!--android:layout_marginStart="8dp"-->
+    <!--android:layout_marginTop="40dp"-->
+    <!--android:textSize="36sp"-->
+    <!--app:layout_constraintBottom_toTopOf="@+id/dice_button_three"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintHorizontal_bias="0.501"-->
+    <!--app:layout_constraintStart_toStartOf="parent"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/player1_total_score"-->
+    <!--app:layout_constraintVertical_bias="0.086" />-->
 
     <ListView
         android:id="@+id/score_list"
         android:layout_width="wrap_content"
-        android:layout_height="576dp"
+        android:layout_height="353dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/dice_button_three"
         app:layout_constraintEnd_toEndOf="parent"
@@ -176,5 +217,26 @@
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="76dp"
+        android:text="@string/player1"
+        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="76dp"
+        android:text="@string/player2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>

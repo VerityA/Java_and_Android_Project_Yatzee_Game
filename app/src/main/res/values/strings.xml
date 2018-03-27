@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">Yatzee</string>
-    <string name="first_roll">Roll</string>
-    <string name="other_roll">Roll again</string>
+    <string name="first_roll">Roll %1$d</string>
+    <string name="finished_roll">Finished</string>
     <string name="player1_score">Player 1 Score:</string>
     <string name="player2_score">Player 2 Score:</string>
     <string name="player1_win">Player 1,  you have won!</string>
     <string name="player2_win">Player 2,  you have won!</string>
     <string name="draw">It\s a draw!</string>
-    <string name="play">Play</string>
+    <string name="play">Play!</string>
     <string name="play_again">Play again?</string>
     <string name="ones">Ones</string>
     <string name="twos">Twos</string>
@@ -22,6 +22,8 @@
     <string name="largestraight">Large Straight</string>
     <string name="yatzee">Yatzee!</string>
     <string name="chance">Chance</string>
+    <string name="player1">Player 1</string>
+    <string name="player2">Player 2</string>
 
 
 </resources>
