@@ -34,6 +34,7 @@ public class PlayerTest {
         assertEquals(25, player.getScore().intValue());
     }
 
+
     @Test
     public void canChangeActivePlayerStatus() {
         assertEquals(true, player.isActivePlayer());

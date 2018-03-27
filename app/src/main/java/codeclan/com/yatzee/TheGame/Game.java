@@ -15,6 +15,7 @@ public class Game {
 
     private Player player1;
     private Player player2;
+    private Player activePlayer;
     private Roll roll;
     private AllScoreButtons allScoreButtons;
     private ArrayList<ScoreButton> scoreButtons;
@@ -23,9 +24,14 @@ public class Game {
     public Game() {
         this.player1 = new Player(true);
         this.player2 =  new Player(false);
+        this.activePlayer = this.getActivePlayer();
         this.roll = new Roll();
         allScoreButtons = new AllScoreButtons();
         scoreButtons = allScoreButtons.getScoreButtons();
+    }
+
+    public AllScoreButtons getAllScoreButtons() {
+        return allScoreButtons;
     }
 
     public Player getPlayer1() {
@@ -37,7 +43,7 @@ public class Game {
     }
 
     public Player getActivePlayer() {
-        if (player1.isActivePlayer() == true) {
+        if (player1.isActivePlayer()) {
             return player1;
         }
         else  {
@@ -62,11 +68,17 @@ public class Game {
         }
     }
 
-    public void setActivePlayerScore() {
+    public ArrayList<Integer> getActivePlayerScores() {
+        if (!player1.isActivePlayer()) {
+            return allScoreButtons.getP2Scores();
+        }
+        return allScoreButtons.getP1Scores();
+    }
+
+    public void setActivePlayerScore(ArrayList<Integer> scoreValues) {
 
         int totalScore = 0;
-        if (player1.isActivePlayer() == true) {
-            ArrayList<Integer> scoreValues = allScoreButtons.getP1Scores();
+        if (player1.isActivePlayer()) {
             for (Integer score : scoreValues) {
                 if (score != null) {
                     totalScore += score;
@@ -76,7 +88,6 @@ public class Game {
         }
 
             else {
-            ArrayList<Integer> scoreValues = allScoreButtons.getP2Scores();
             for (Integer score : scoreValues) {
                 if (score != null) {
                     totalScore += score;

@@ -4,6 +4,7 @@ import java.net.Inet4Address;
 import java.util.ArrayList;
 
 import codeclan.com.yatzee.Players.Player;
+import codeclan.com.yatzee.TheGame.Game;
 
 /**
  * Created by user on 26/03/2018.
@@ -43,6 +44,10 @@ public class AllScoreButtons {
     public ArrayList<ScoreButton> getScoreButtons() {
         return scoreButtons;
     }
+
+
+
+
 
     public ArrayList<Integer> getP1Scores() {
         ArrayList<Integer> p1Scores = new ArrayList<>();

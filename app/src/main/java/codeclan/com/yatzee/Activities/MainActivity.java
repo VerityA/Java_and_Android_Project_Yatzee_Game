@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Player player1;
     private Player player2;
+    private Player activePlayer;
 
     private TextView playerOneText;
     private TextView playerTwoText;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private ScoreButtonAdaptor buttonAdapter;
     private ListView buttonListView;
     private Integer currentPositionIndex;
+    ScoreButtonAdaptor buttonAdaptor;
 
 
     private TextView winningMessage;
@@ -95,26 +97,30 @@ public class MainActivity extends AppCompatActivity {
 
         player1 = game.getPlayer1();
         player2 = game.getPlayer2();
+        activePlayer = game.getActivePlayer();
 
-        allScoreButtons = new AllScoreButtons();
+        allScoreButtons = game.getAllScoreButtons();
         scoreButtonList = allScoreButtons.getScoreButtons();
         buttonAdapter = new ScoreButtonAdaptor(this, scoreButtonList);
         buttonListView = findViewById(R.id.score_list);
         buttonListView.setAdapter(buttonAdapter);
 
         currentPositionIndex = buttonListView.getFirstVisiblePosition();
+        ListView buttonListView = findViewById(R.id.score_list);
 
-        refreshList();
+        buttonAdaptor = new ScoreButtonAdaptor(this, scoreButtonList);
+        buttonListView.setAdapter(buttonAdaptor);
+
+//        refreshList();
 
     }
 
     public void refreshList() {
-        ScoreButtonAdaptor buttonAdaptor = new ScoreButtonAdaptor(this, scoreButtonList);
-        ListView buttonListView = findViewById(R.id.score_list);
-        Integer currentIndex = buttonListView.getFirstVisiblePosition();
-        Log.d("index position: ", currentIndex.toString());
-        buttonListView.setAdapter(buttonAdaptor);
-        buttonListView.setSelection(currentIndex);
+
+        buttonAdaptor.notifyDataSetChanged();
+//        Integer currentIndex = buttonListView.getFirstVisiblePosition();
+//        Log.d("index position: ", currentIndex.toString());
+//        buttonListView.setSelection(currentIndex);
 
     }
 
@@ -278,8 +284,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void onPlayButtonClick(View playClickLView) {
 //        refreshList();
+        Log.d("active player? : ", game.getActivePlayer().toString());
+        Log.d("player1 active? : ", game.getPlayer1().isActivePlayer().toString());
+        Log.d("player2 active? : ", game.getPlayer2().isActivePlayer().toString());
         Log.d("has been rolled test", hasDiceBeenRolled.toString());
-        Log.d("test array of values: ", allScoreButtons.getP1Scores().toString());
+        Log.d("test array of values: ", game.getActivePlayerScores().toString());
+
+        Log.d("p1 score test: ", allScoreButtons.getP1Scores().toString());
+        Log.d("p2 score test: ", allScoreButtons.getP2Scores().toString());
 
         hasPlayerSelectedScored = false;
 
@@ -306,7 +318,11 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        game.setActivePlayerScore();
+        game.setActivePlayerScore(game.getActivePlayerScores());
+
+        Log.d("score test: ", game.getActivePlayer().getScore().toString());
+
+
 
         roll.clearDice();
 
