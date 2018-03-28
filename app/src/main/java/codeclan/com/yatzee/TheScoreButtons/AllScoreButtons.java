@@ -66,13 +66,13 @@ public class AllScoreButtons {
         return p2Scores;
     }
 
-//    public ArrayList<Integer> getPlayerScores(Player player) {
-//        ArrayList<Integer> scores = new ArrayList<>();
-//
-//        for (ScoreButton scoreButton: scoreButtons) {
-//            Integer score = scoreButton.getActivePlayerStrategyValue();
-//            scores.add(score);
-//        }
-//        return scores;
-//    }
+    public void setAllScoresToNull() {
+        ArrayList<ScoreButton> scoreButtons = getScoreButtons();
+
+        for (ScoreButton scoreButton : scoreButtons) {
+            scoreButton.setP1ScoreValue(null);
+            scoreButton.setP2ScoreValue(null);
+        }
+    }
+
 }

@@ -63,8 +63,6 @@ public class Player {
         this.totalScore = score;
     }
 
-
-
     public void setTurnsTaken(int turnsTaken) {
         this.turnsTaken = turnsTaken;
     }
@@ -74,10 +72,6 @@ public class Player {
         for (Strategy strategy : strategies) {
             this.scoreMap.put(strategy, null);
         }
-    }
-
-    public Boolean getActivePlayer() {
-        return activePlayer;
     }
 
     public HashMap<Strategy, Integer> getScoreMap() {

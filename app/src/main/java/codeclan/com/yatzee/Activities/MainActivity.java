@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         playerOneText.setText(playerOneScore);
         playerTwoText.setText(playerTwoScore);
 
-        playerOneText.setTextSize(24);
+        playerOneText.setTextSize(26);
         playerOneText.setTypeface(null, Typeface.BOLD);
 
         player1 = game.getPlayer1();
@@ -266,15 +266,24 @@ public class MainActivity extends AppCompatActivity {
         if (playButton.getText() == getString(R.string.play_again)) {
             player1.resetScore();
             player2.resetScore();
+            player1Score = game.getPlayer1().getScore();
+            player2Score = game.getPlayer2().getScore();
             playerOneScore = getString(R.string.player1_score, player1Score);
-            playerTwoScore = getString(R.string.player2_score, player1Score);
+            playerTwoScore = getString(R.string.player2_score, player2Score);
             playerOneText.setText(playerOneScore);
             playerTwoText.setText(playerTwoScore);
             player1.setTurnsTaken(0);
             player2.setTurnsTaken(0);
+            setActivePlayerBanner(player2Display, player1Display, playerTwoText, playerOneText);
             roll.resetRollCount();
-            rollButton.setText(R.string.first_roll);
+            int rollNumber = min(roll.getRollCount() + 1, 3);
+            rollButton.setText(getString(R.string.first_roll, rollNumber));
+            rollButton.setEnabled(true);
             playButton.setText(R.string.play);
+            playButton.setEnabled(false);
+            winningMessage.setText("");
+            allScoreButtons.setAllScoresToNull();
+            refreshList();
             return;
         }
 
@@ -371,11 +380,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setActivePlayerBanner(View activePDisplay, View inactivePDisplay, TextView activePTextView, TextView inactivePTextView) {
-        activePDisplay.setBackgroundColor(Color.YELLOW);
-        inactivePDisplay.setBackgroundColor(Color.LTGRAY);
-        activePTextView.setTextSize(30);
+        activePDisplay.setBackgroundColor(Color.WHITE);
+        inactivePDisplay.setBackgroundColor(getResources().getColor(R.color.yellow));
+        activePTextView.setTextColor(getResources().getColor(R.color.colorPrimary));
         activePTextView.setTypeface(null, Typeface.BOLD);
-        inactivePTextView.setTextSize(18);
+        inactivePTextView.setTextColor(Color.WHITE);
         inactivePTextView.setTypeface(null, Typeface.NORMAL);
     }
 

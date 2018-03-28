@@ -2,8 +2,8 @@
     <string name="app_name">Yatzee</string>
     <string name="first_roll">Roll %1$d</string>
     <string name="finished_roll">Finished</string>
-    <string name="player1_score">Player 1 :                   %1$d</string>
-    <string name="player2_score">Player 2 :                   %1$d</string>
+    <string name="player1_score">Player 1 &#160; &#160; &#160; %1$d</string>
+    <string name="player2_score">Player 2 &#160; &#160; &#160; %1$d</string>
     <string name="player1_win">Player 1 wins!</string>
     <string name="player2_win">Player 2 wins!</string>
     <string name="draw">It\s a draw!</string>

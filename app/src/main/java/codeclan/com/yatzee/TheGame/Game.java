@@ -58,34 +58,6 @@ public class Game {
         return roll;
     }
 
-    public void setActivePlayerScorex() {
-        int totalScore = 0;
-        for (int value : roll.getDiceRollValues()) {
-            totalScore += value;
-        }
-        if (player1.isActivePlayer() == true) {
-            player1.increasePlayerScore(totalScore);
-        }
-        else {
-            player2.increasePlayerScore(totalScore);
-        }
-    }
-
-    public Integer getPlayerStrategyValue(Player player, ScoreButton scoreButton){
-        if (player == this.player1) {
-            return scoreButton.getP1ScoreValue();
-        }
-        return scoreButton.getP2ScoreValue();
-    }
-
-    public void setPlayerStrategyValue(Player player, ScoreButton scoreButton, Integer scoreValue) {
-        if (player == this.player1) {
-            scoreButton.setP1ScoreValue(scoreValue);
-        }
-        else {
-            scoreButton.setP2ScoreValue(scoreValue);
-        }
-    }
 
     public ArrayList<Integer> getActivePlayerScores() {
         if (!player1.isActivePlayer()) {
@@ -115,23 +87,6 @@ public class Game {
             player2.setTotalScore(totalScore);
          }
     }
-
-//    public Integer getAPlayerStrategyValueForButton(ScoreButton scoreButton) {
-//        if (player1.isActivePlayer()) {
-//            return scoreButton.getP1ScoreValue();
-//        }
-//
-//        return scoreButton.getP2ScoreValue();
-//    }
-//
-//    public void setAPlayerStrategyValueForButton(ScoreButton scoreButton, Integer strategyValue) {
-//        if (player1.isActivePlayer()) {
-//            scoreButton.setP1ScoreValue(strategyValue);
-//        }
-//        else {
-//            scoreButton.setP2ScoreValue(strategyValue);
-//        }
-//    }
 
     public Integer getScoreOfButtonForPlayer(ScoreButton scoreButton, Player player) {
         if (player == player1) {
@@ -173,7 +128,7 @@ public class Game {
         player2.changeActivePlayerStatus();
     }
 
-//    public
+
 }
 
 
