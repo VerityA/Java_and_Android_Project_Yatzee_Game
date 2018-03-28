@@ -46,9 +46,6 @@ public class AllScoreButtons {
     }
 
 
-
-
-
     public ArrayList<Integer> getP1Scores() {
         ArrayList<Integer> p1Scores = new ArrayList<>();
 
@@ -68,4 +65,14 @@ public class AllScoreButtons {
         }
         return p2Scores;
     }
+
+//    public ArrayList<Integer> getPlayerScores(Player player) {
+//        ArrayList<Integer> scores = new ArrayList<>();
+//
+//        for (ScoreButton scoreButton: scoreButtons) {
+//            Integer score = scoreButton.getActivePlayerStrategyValue();
+//            scores.add(score);
+//        }
+//        return scores;
+//    }
 }

@@ -2,12 +2,14 @@ package codeclan.com.yatzee.Activities;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,12 +47,15 @@ public class MainActivity extends AppCompatActivity {
 
     private Player player1;
     private Player player2;
+    private Integer player1Score;
+    private Integer player2Score;
     private Player activePlayer;
 
     private TextView playerOneText;
     private TextView playerTwoText;
-    private TextView playerOneScore;
-    private TextView playerTwoScore;
+
+    private String playerOneScore;
+    private String playerTwoScore;
 
     private Boolean hasDiceBeenRolled;
     private boolean hasPlayerSelectedScored;
@@ -65,6 +70,9 @@ public class MainActivity extends AppCompatActivity {
     ScoreButtonAdaptor buttonAdaptor;
 
     private Button playButton;
+
+    private View player1Display;
+    private View player2Display;
 
 
     private TextView winningMessage;
@@ -93,14 +101,18 @@ public class MainActivity extends AppCompatActivity {
         diceButtons.add(diceFour);
         diceButtons.add(diceFive);
 
-        playerOneScore = findViewById(R.id.player1_total_score);
-        playerOneScore.setText(game.getPlayer1().getScore().toString());
 
-        playerTwoScore = findViewById(R.id.player2_total_score);
-        playerTwoScore.setText(game.getPlayer2().getScore().toString());
+        player1Score = game.getPlayer1().getScore();
+        player2Score = game.getPlayer2().getScore();
+
+        playerOneScore = getString(R.string.player1_score, player1Score);
+        playerTwoScore = getString(R.string.player2_score, player2Score);
 
         playerOneText = findViewById(R.id.player1_text);
         playerTwoText = findViewById(R.id.player2_text);
+
+        playerOneText.setText(playerOneScore);
+        playerTwoText.setText(playerTwoScore);
 
         playerOneText.setTextSize(24);
         playerOneText.setTypeface(null, Typeface.BOLD);
@@ -128,37 +140,26 @@ public class MainActivity extends AppCompatActivity {
         playButton = findViewById(R.id.play_button);
         playButton.setEnabled(false);
 
-//        refreshList();
-
     }
 
     public void refreshList() {
-
         buttonAdaptor.notifyDataSetChanged();
-//        Integer currentIndex = buttonListView.getFirstVisiblePosition();
-//        Log.d("index position: ", currentIndex.toString());
-//        buttonListView.setSelection(currentIndex);
-
     }
 
 
     public void onDiceButtonClick(View diceClickView) {
-
         ImageButton diceButton = (ImageButton) diceClickView;
         diceButton.clearColorFilter();
 
         Dice die = (Dice) diceClickView.getTag();
         die.changeHeldStatus();
 
-        if( die.isHeld() == true) {
+        if (die.isHeld() == true) {
             diceButton.setColorFilter(R.color.grey_out);
         }
     }
 
     public void onRollButtonClick(View rollClickView) {
-//        playButton.setEnabled();
-//        if (!hasPlayerSelectedScored) {playButton.setEnabled(false);}
-
         int rollNumber = min(roll.getRollCount() + 2, 3);
         String rollNumberMsg = getString(R.string.first_roll, rollNumber);
         String rollFinished = getString(R.string.finished_roll);
@@ -176,182 +177,104 @@ public class MainActivity extends AppCompatActivity {
 
         if (game.getActivePlayer().getTurnsTaken() == 13) {
             return;
+        } else if (roll.getRollCount() == 0) {
+            dice = roll.firstFullRollOfDice();
+        } else {
+            dice = roll.reRollDice();
         }
 
 
-        else if (roll.getRollCount() == 0) {
-                dice = roll.firstFullRollOfDice();
-        }
-        else {
-                dice = roll.reRollDice();
-        }
-
-
-        for (int i=0; i < 5; i++) {
+        for (int i = 0; i < 5; i++) {
             String imageName = dice.get(i).getDiceType().getImage();
             Integer resID = getResources().getIdentifier(imageName, "drawable", getPackageName());
             diceButtons.get(i).setImageResource(resID);
             diceButtons.get(i).setTag(dice.get(i));
         }
 
-
         if (roll.doesContainMultipleOfAnyDieValue(5)) {
             Toast.makeText(this, R.string.yatzee, Toast.LENGTH_SHORT).show();
         }
 
-
-//        rollButton.setText(R.string.other_roll);
-
     }
 
     public void onP1ScoreButtonClick(View buttonListView) {
-        playButton.setEnabled(true);
+        ScoreButton selectedScore = (ScoreButton) buttonListView.getTag();
 
-        Log.d("has been rolled test", hasDiceBeenRolled.toString());
-        if (!hasDiceBeenRolled || !player1.isActivePlayer()) { return;}
+        if (hasPlayerSelectedScored){
 
-        ScoreButton selectedP1Score = (ScoreButton) buttonListView.getTag();
-        if (selectedP1Score.getP1ScoreValue() != null) {return;}
-
-        if(!hasPlayerSelectedScored) {
-
-            ScoreButton scoreButton = null;
-
-            for(ScoreButton button : scoreButtonList) {
-                if(button.getStrategyType() == selectedP1Score.getStrategyType()) {
-                    scoreButton = button;
-                }
-            }
-
-            Integer p1Score = scoreButton.calculateScore(roll);
-            scoreButton.setP1ScoreValue(p1Score);
-            hasPlayerSelectedScored = true;
-            previouslySelectedScore = selectedP1Score.getStrategyType();
+        if (selectedScore.getStrategyType() == previouslySelectedScore) {
+            selectedScore.setP1ScoreValue(null);
+            refreshList();
+            hasPlayerSelectedScored = false;
+            playButton.setEnabled(false);
+            return;
+        }}
+        actionScoreButtonForActivePlayer(player1, selectedScore);
 
 
-        } else {
-            ScoreButton scoreButton = null;
-
-            for(ScoreButton button : scoreButtonList) {
-                if(button.getStrategyType() == previouslySelectedScore) {
-                    scoreButton = button;
-                }
-            }
-
-            scoreButton.setP1ScoreValue(null);
-
-
-            Integer p1Score = selectedP1Score.calculateScore(roll);
-
-            for(ScoreButton button : scoreButtonList) {
-                if(button.getStrategyType() == selectedP1Score.getStrategyType()) {
-                    scoreButton = button;
-                }
-            }
-
-            scoreButton.setP1ScoreValue(p1Score);
-
-            previouslySelectedScore = selectedP1Score.getStrategyType();
-
-        }
-
-        Log.d("test array of buttons.", scoreButtonList.toString());
-
-        ArrayList<ScoreButton> myNewData = scoreButtonList;
-
-//        buttonAdapter.updateData(myNewData);  //update adapter's data
-//        myAdapter.notifyDataSetChanged();
-
-        refreshList();
     }
+
 
     public void onP2ScoreButtonClick(View buttonListView) {
-        playButton.setEnabled(true);
+        ScoreButton selectedScore = (ScoreButton) buttonListView.getTag();
 
-        Log.d("has been rolled test", hasDiceBeenRolled.toString());
-        if (!hasDiceBeenRolled || !player2.isActivePlayer()) { return;}
+        if (hasPlayerSelectedScored){
 
-        ScoreButton selectedP2Score = (ScoreButton) buttonListView.getTag();
-        if (selectedP2Score.getP2ScoreValue() != null) {return;}
+            if (selectedScore.getStrategyType() == previouslySelectedScore) {
+                selectedScore.setP2ScoreValue(null);
+                refreshList();
+                hasPlayerSelectedScored = false;
+                playButton.setEnabled(false);
+                return;
+            }}
 
-        if(!hasPlayerSelectedScored) {
+//        setScoreAndTurnToNullIfPreviouslySelected(selectedScore);
 
-            ScoreButton scoreButton = null;
+        actionScoreButtonForActivePlayer(player2, selectedScore);
+    }
 
-            for(ScoreButton button : scoreButtonList) {
-                if(button.getStrategyType() == selectedP2Score.getStrategyType()) {
-                    scoreButton = button;
-                }
-            }
 
-            Integer p2Score = scoreButton.calculateScore(roll);
-            scoreButton.setP2ScoreValue(p2Score);
+    public void actionScoreButtonForActivePlayer(Player player, ScoreButton selectedScore) {
+
+        if (!hasDiceBeenRolled || !player.isActivePlayer()) {return;}
+
+        if (player.isActivePlayer() && hasDiceBeenRolled) {playButton.setEnabled(true);}
+
+        if (selectedScore.getStrategyType() == previouslySelectedScore) {
+            game.setScoreOfButtonForPlayer(selectedScore, player, null);
+        }
+
+        if (game.getScoreOfButtonForPlayer(selectedScore, player) != null) {return;}
+
+        if (!hasPlayerSelectedScored) {
+            setSelectedButtonScore(selectedScore,player);
             hasPlayerSelectedScored = true;
-            previouslySelectedScore = selectedP2Score.getStrategyType();
-
-
         } else {
-            ScoreButton scoreButton = null;
-
-            for(ScoreButton button : scoreButtonList) {
-                if(button.getStrategyType() == previouslySelectedScore) {
-                    scoreButton = button;
-                }
-            }
-
-            scoreButton.setP2ScoreValue(null);
-
-
-            Integer p2Score = selectedP2Score.calculateScore(roll);
-
-            for(ScoreButton button : scoreButtonList) {
-                if(button.getStrategyType() == selectedP2Score.getStrategyType()) {
-                    scoreButton = button;
-                }
-            }
-
-            scoreButton.setP2ScoreValue(p2Score);
-
-            previouslySelectedScore = selectedP2Score.getStrategyType();
-
+            ScoreButton selectedButton = findSelectedButtonByStrategy(previouslySelectedScore);
+            game.setScoreOfButtonForPlayer(selectedButton, player, null);
+            setSelectedButtonScore(selectedScore,player);
         }
 
         refreshList();
-
     }
-
 
 
     public void onPlayButtonClick(View playClickLView) {
-
-
-
-//        refreshList();
-        Log.d("active player? : ", game.getActivePlayer().toString());
-        Log.d("player1 active? : ", game.getPlayer1().isActivePlayer().toString());
-        Log.d("player2 active? : ", game.getPlayer2().isActivePlayer().toString());
-        Log.d("has been rolled test", hasDiceBeenRolled.toString());
-        Log.d("test array of values: ", game.getActivePlayerScores().toString());
-
-        Log.d("p1 score test: ", allScoreButtons.getP1Scores().toString());
-        Log.d("p2 score test: ", allScoreButtons.getP2Scores().toString());
-
-        hasPlayerSelectedScored = false;
+     hasPlayerSelectedScored = false;
 
 
         if (playButton.getText() == getString(R.string.play_again)) {
             player1.resetScore();
             player2.resetScore();
-            playerOneScore.setText(player1.getScore().toString());
-            playerTwoScore.setText(player2.getScore().toString());
+            playerOneScore = getString(R.string.player1_score, player1Score);
+            playerTwoScore = getString(R.string.player2_score, player1Score);
+            playerOneText.setText(playerOneScore);
+            playerTwoText.setText(playerTwoScore);
             player1.setTurnsTaken(0);
             player2.setTurnsTaken(0);
             roll.resetRollCount();
             rollButton.setText(R.string.first_roll);
             playButton.setText(R.string.play);
-//            playerOneText.setBackgroundColor(Color.GRAY);
-//            playerTwoText.setBackgroundColor(0);
-//            winningMessage.setText(null);
             return;
         }
 
@@ -370,81 +293,102 @@ public class MainActivity extends AppCompatActivity {
         roll.clearDice();
 
         for (int i=0; i < 5; i++) {
-            diceButtons.get(i).setImageResource(android.R.drawable.checkbox_off_background);
+
+            diceButtons.get(i).setImageResource(0);
             diceButtons.get(i).clearColorFilter();
 
         }
 
         rollButton.setText(R.string.first_roll);
 
-        playerOneScore.setText(player1.getScore().toString());
-        playerTwoScore.setText(player2.getScore().toString());
+        player1Score = game.getPlayer1().getScore();
+        player2Score = game.getPlayer2().getScore();
+        playerOneScore = getString(R.string.player1_score, player1Score);
+        playerTwoScore = getString(R.string.player2_score, player2Score);
+        playerOneText.setText(playerOneScore);
+        playerTwoText.setText(playerTwoScore);
 
-        player1.changeActivePlayerStatus();
-        player2.changeActivePlayerStatus();
+        game.changeTurns();
 
-        View player1Display = findViewById(R.id.rectangle_player1);
-        View player2Display = findViewById(R.id.rectangle_player2);
+        activePlayer = game.getActivePlayer();
 
-
-        Integer resIDYellow = getResources().getIdentifier("yellow", "color", getPackageName());
-        Integer resIDGrey = getResources().getIdentifier("grey", "color", getPackageName());
+        player1Display = findViewById(R.id.rectangle_player1);
+        player2Display = findViewById(R.id.rectangle_player2);
 
         if (player1 == game.getActivePlayer() ) {
-            player1Display.setBackgroundColor(Color.YELLOW);
-            player2Display.setBackgroundColor(Color.LTGRAY);
-            playerOneText.setTextSize(30);
-            playerOneText.setTypeface(null, Typeface.BOLD);
-            playerTwoText.setTextSize(18);
-            playerTwoText.setTypeface(null, Typeface.NORMAL);
-//            playerOneText.setBackgroundColor(Color.GRAY);
+            setActivePlayerBanner(player1Display, player2Display, playerOneText, playerTwoText);
         }
         else {
-            player1Display.setBackgroundColor(Color.LTGRAY);
-            player2Display.setBackgroundColor(Color.YELLOW);
-            playerTwoText.setTextSize(30);
-            playerTwoText.setTypeface(null, Typeface.BOLD);
-            playerOneText.setTextSize(18);
-            playerOneText.setTypeface(null, Typeface.NORMAL);
-//            playerOneText.setBackgroundColor(0);
-//            playerTwoText.setBackgroundColor(Color.GRAY);
+            setActivePlayerBanner(player2Display, player1Display, playerTwoText, playerOneText);
         }
-
-        if (player1.getTurnsTaken() + player2.getTurnsTaken() == 26) {
-
-            player1Display.setBackgroundColor(0);
-            player2Display.setBackgroundColor(0);
-            playerOneText.setText("");
-            playerTwoText.setText("");
-            playerOneScore.setText("");
-            playerTwoScore.setText("");
-
-                playButton.setText(R.string.play_again);
-//                playerOneText.setBackgroundColor(0);
-//                playerTwoText.setBackgroundColor(0);
-
-
-                winningMessage = findViewById(R.id.winner_msg);
-                if (player1.getScore() == player2.getScore()) {
-                    winningMessage.setText(R.string.draw);
-                }
-                else if(player1.getScore() > player2.getScore()) {
-                    winningMessage.setText(R.string.player1_win);
-                }
-                else {
-                    winningMessage.setText(R.string.player2_win);
-                }
-
-
-            }
-        hasDiceBeenRolled = false;
-
-        int rollNumber = min(roll.getRollCount() + 1, 3);
-        rollButton.setText(getString(R.string.first_roll, rollNumber));
 
         rollButton.setEnabled(true);
         playButton.setEnabled(false);
 
+        if (game.hasGameFinished()) {
+
+            resetTitleDisplay(player1Display, playerOneText);
+            resetTitleDisplay(player2Display, playerTwoText);
+
+                playButton.setText(R.string.play_again);
+
+                rollButton.setEnabled(false);
+                playButton.setEnabled(true);
+
+            winningMessage = findViewById(R.id.winner_msg);
+            String message = game.getWinningMessage();
+            Integer resIDMessage = getResources().getIdentifier(message, "string", getPackageName());
+            winningMessage.setText(resIDMessage);
+            }
+
+        hasDiceBeenRolled = false;
+
+        int rollNumber = min(roll.getRollCount() + 1, 3);
+        rollButton.setText(getString(R.string.first_roll, rollNumber));
         }
+
+    public void setSelectedButtonScore(ScoreButton scoreButton, Player player){
+        ScoreButton selectedButton = findSelectedButtonByStrategy(scoreButton.getStrategyType());
+        Integer score = selectedButton.calculateScore(roll);
+        game.setScoreOfButtonForPlayer(selectedButton, player, score);
+//        previouslySelectedScore = selectedButton.getStrategyType();
+    }
+
+    public ScoreButton findSelectedButtonByStrategy(Strategy strategy) {
+        ScoreButton scoreButton = null;
+        for (ScoreButton button : scoreButtonList) {
+            if (strategy == button.getStrategyType()) {
+                scoreButton = button;
+            }
+        }
+        previouslySelectedScore = strategy;
+        return scoreButton;
+    }
+
+    public void resetTitleDisplay(View display, TextView textView) {
+        display.setBackgroundColor(0);
+        textView.setText("");
+    }
+
+    public void setActivePlayerBanner(View activePDisplay, View inactivePDisplay, TextView activePTextView, TextView inactivePTextView) {
+        activePDisplay.setBackgroundColor(Color.YELLOW);
+        inactivePDisplay.setBackgroundColor(Color.LTGRAY);
+        activePTextView.setTextSize(30);
+        activePTextView.setTypeface(null, Typeface.BOLD);
+        inactivePTextView.setTextSize(18);
+        inactivePTextView.setTypeface(null, Typeface.NORMAL);
+    }
+
+    public void setScoreAndTurnToNullIfPreviouslySelected(ScoreButton scoreButton) {
+        if (hasPlayerSelectedScored){
+
+            if (scoreButton.getStrategyType() == previouslySelectedScore) {
+                scoreButton.setP1ScoreValue(null);
+                refreshList();
+                hasPlayerSelectedScored = false;
+                playButton.setEnabled(false);
+                return;
+            }}
+    }
 
 }

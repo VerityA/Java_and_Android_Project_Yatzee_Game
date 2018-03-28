@@ -42,33 +42,12 @@ public class ScoreButtonAdaptor extends ArrayAdapter {
         ImageView strategyImage = viewList.findViewById(R.id.strategy_image);
         strategyImage.setImageResource(resIDImage);
 
-        Button p1ScoreButton = viewList.findViewById(R.id.player1_score);
-
-//        ArrayList<Strategy> lowerScoreStrategies = new ArrayList<>();
-//        lowerScoreStrategies.add(Strategy.ONES);
-//        lowerScoreStrategies.add(Strategy.TWOS);
-//        lowerScoreStrategies.add(Strategy.THREES);
-//        lowerScoreStrategies.add(Strategy.FOURS);
-//        lowerScoreStrategies.add(Strategy.FIVES);
-//        lowerScoreStrategies.add(Strategy.SIXES);
-
         String colour = scoreButton.getStrategyType().getColour();
-        Log.d("test colour", scoreButton.getStrategyType().getColour());
         Integer resIDColour = getContext().getResources().getIdentifier(colour, "color", getContext().getPackageName());
-
-        //21300001
-        //21200004
-
-        Log.d("res Id", resIDColour.toString());
-        Log.d("darker green", "color: " + R.color.darker_green);
-
-
-
         viewList.setBackgroundColor( getContext().getResources().getColor(resIDColour) );
-//        if (lowerScoreStrategies.contains(scoreButton.getStrategyType()) )
-//        {viewList.setBackgroundColor(R.color.pale_green);}
 
 
+        Button p1ScoreButton = viewList.findViewById(R.id.player1_score);
 
         if(scoreButton.getP1ScoreValue() == null) {
             p1ScoreButton.setText(null);
