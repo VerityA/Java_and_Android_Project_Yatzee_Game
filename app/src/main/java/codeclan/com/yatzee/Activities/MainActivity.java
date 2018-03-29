@@ -30,7 +30,7 @@ import static java.lang.Integer.TYPE;
 import static java.lang.Integer.max;
 import static java.lang.Math.min;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends MenuActivity {
 
     private ImageButton diceOne;
     private ImageButton diceTwo;
@@ -142,6 +142,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        return;
+    }
+
     public void refreshList() {
         buttonAdaptor.notifyDataSetChanged();
     }
@@ -226,9 +231,8 @@ public class MainActivity extends AppCompatActivity {
                 hasPlayerSelectedScored = false;
                 playButton.setEnabled(false);
                 return;
-            }}
-
-//        setScoreAndTurnToNullIfPreviouslySelected(selectedScore);
+            }
+        }
 
         actionScoreButtonForActivePlayer(player2, selectedScore);
     }
@@ -238,13 +242,15 @@ public class MainActivity extends AppCompatActivity {
 
         if (!hasDiceBeenRolled || !player.isActivePlayer()) {return;}
 
+        if (game.getScoreOfButtonForPlayer(selectedScore, player) != null) {
+            playButton.setEnabled(false);
+            return;}
+
         if (player.isActivePlayer() && hasDiceBeenRolled) {playButton.setEnabled(true);}
 
         if (selectedScore.getStrategyType() == previouslySelectedScore) {
             game.setScoreOfButtonForPlayer(selectedScore, player, null);
         }
-
-        if (game.getScoreOfButtonForPlayer(selectedScore, player) != null) {return;}
 
         if (!hasPlayerSelectedScored) {
             setSelectedButtonScore(selectedScore,player);

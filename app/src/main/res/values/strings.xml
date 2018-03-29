@@ -6,7 +6,7 @@
     <string name="player2_score">Player 2 &#160; &#160; &#160; %1$d</string>
     <string name="player1_win">Player 1 wins!</string>
     <string name="player2_win">Player 2 wins!</string>
-    <string name="draw">It\s a draw!</string>
+    <string name="draw">It\'s a draw!</string>
     <string name="play">Submit</string>
     <string name="play_again">Play again?</string>
     <string name="ones">Ones</string>
@@ -24,6 +24,24 @@
     <string name="chance">Chance</string>
     <string name="player1">Player 1</string>
     <string name="player2">Player 2</string>
+    <string name="lets_play">Let\'s play!</string>
+    <string name="welcome">Welcome to Yatzee!</string>
+    <string name="new_game">New Game</string>
+    <string name="rules">Rules</string>
+    <string name="rules_title">Them\'s The Rules...</string>
+    <string name="the_rules">
+        <b>How to play:</b> \n \n
+        Enjoy this two player dice game. \n \n
+        Each player takes turns to play 13 rounds. \n \n
+        The object is to get the highest number of points after all rounds have been played. \n \n
+        To start a round the player rolls the dice up to three times. \n \n
+        Press of any of the dice to hold them before rolling again. \n \n
+        On each round the player must select a game category. \n \n
+        Each game category will be worth a different number of points depending on the final roll of the dice. \n \n
+        Press on each of the category buttons to see what the value of the turn is. \n \n
+        Once happy with your selection, press the submit button. \n \n
+        Pass to your friend who can play their turn.
+    </string>
 
 
 </resources>
