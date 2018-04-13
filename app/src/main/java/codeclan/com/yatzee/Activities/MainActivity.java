@@ -6,11 +6,14 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -168,7 +171,7 @@ public class MainActivity extends MenuActivity {
         int rollNumber = min(roll.getRollCount() + 2, 3);
         String rollNumberMsg = getString(R.string.first_roll, rollNumber);
         String rollFinished = getString(R.string.finished_roll);
-        Log.d("finished? :", rollFinished);
+
 
         rollButton.setText(rollNumberMsg);
 
@@ -178,7 +181,6 @@ public class MainActivity extends MenuActivity {
         }
         hasDiceBeenRolled = true;
 
-        Log.e("test: ", "working?");
 
         if (game.getActivePlayer().getTurnsTaken() == 13) {
             return;
@@ -197,43 +199,26 @@ public class MainActivity extends MenuActivity {
         }
 
         if (roll.doesContainMultipleOfAnyDieValue(5)) {
-            Toast.makeText(this, R.string.yatzee, Toast.LENGTH_SHORT).show();
+            Toast toast = Toast.makeText(this, R.string.yatzee, Toast.LENGTH_LONG);
+
+            ViewGroup group = (ViewGroup) toast.getView();
+            TextView messageTextView = (TextView) group.getChildAt(0);
+            messageTextView.setTextSize(40);
+            messageTextView.setBackgroundColor(getResources().getColor(R.color.yellow));
+            toast.setGravity(Gravity.CENTER,0,0);
+            toast.show();
         }
 
     }
 
     public void onP1ScoreButtonClick(View buttonListView) {
         ScoreButton selectedScore = (ScoreButton) buttonListView.getTag();
-
-        if (hasPlayerSelectedScored){
-
-        if (selectedScore.getStrategyType() == previouslySelectedScore) {
-            selectedScore.setP1ScoreValue(null);
-            refreshList();
-            hasPlayerSelectedScored = false;
-            playButton.setEnabled(false);
-            return;
-        }}
         actionScoreButtonForActivePlayer(player1, selectedScore);
-
-
     }
 
 
     public void onP2ScoreButtonClick(View buttonListView) {
         ScoreButton selectedScore = (ScoreButton) buttonListView.getTag();
-
-        if (hasPlayerSelectedScored){
-
-            if (selectedScore.getStrategyType() == previouslySelectedScore) {
-                selectedScore.setP2ScoreValue(null);
-                refreshList();
-                hasPlayerSelectedScored = false;
-                playButton.setEnabled(false);
-                return;
-            }
-        }
-
         actionScoreButtonForActivePlayer(player2, selectedScore);
     }
 
@@ -242,15 +227,21 @@ public class MainActivity extends MenuActivity {
 
         if (!hasDiceBeenRolled || !player.isActivePlayer()) {return;}
 
+        if (hasPlayerSelectedScored){
+
+            if (selectedScore.getStrategyType() == previouslySelectedScore) {
+                game.setScoreOfButtonForPlayer(selectedScore, player, null);
+                refreshList();
+                hasPlayerSelectedScored = false;
+                playButton.setEnabled(false);
+                return;
+            }
+        }
+
         if (game.getScoreOfButtonForPlayer(selectedScore, player) != null) {
-            playButton.setEnabled(false);
             return;}
 
         if (player.isActivePlayer() && hasDiceBeenRolled) {playButton.setEnabled(true);}
-
-        if (selectedScore.getStrategyType() == previouslySelectedScore) {
-            game.setScoreOfButtonForPlayer(selectedScore, player, null);
-        }
 
         if (!hasPlayerSelectedScored) {
             setSelectedButtonScore(selectedScore,player);
@@ -272,7 +263,7 @@ public class MainActivity extends MenuActivity {
         if (playButton.getText() == getString(R.string.play_again)) {
             player1.resetScore();
             player2.resetScore();
-            player1Score = game.getPlayer1().getScore();
+            player1Score = game.getPlayer1().getScore(); /** TODO: ***/
             player2Score = game.getPlayer2().getScore();
             playerOneScore = getString(R.string.player1_score, player1Score);
             playerTwoScore = getString(R.string.player2_score, player2Score);
@@ -316,7 +307,7 @@ public class MainActivity extends MenuActivity {
 
         rollButton.setText(R.string.first_roll);
 
-        player1Score = game.getPlayer1().getScore();
+        player1Score = game.getPlayer1().getScore();  /** TODO: ***/
         player2Score = game.getPlayer2().getScore();
         playerOneScore = getString(R.string.player1_score, player1Score);
         playerTwoScore = getString(R.string.player2_score, player2Score);
@@ -366,7 +357,6 @@ public class MainActivity extends MenuActivity {
         ScoreButton selectedButton = findSelectedButtonByStrategy(scoreButton.getStrategyType());
         Integer score = selectedButton.calculateScore(roll);
         game.setScoreOfButtonForPlayer(selectedButton, player, score);
-//        previouslySelectedScore = selectedButton.getStrategyType();
     }
 
     public ScoreButton findSelectedButtonByStrategy(Strategy strategy) {
@@ -392,18 +382,6 @@ public class MainActivity extends MenuActivity {
         activePTextView.setTypeface(null, Typeface.BOLD);
         inactivePTextView.setTextColor(Color.WHITE);
         inactivePTextView.setTypeface(null, Typeface.NORMAL);
-    }
-
-    public void setScoreAndTurnToNullIfPreviouslySelected(ScoreButton scoreButton) {
-        if (hasPlayerSelectedScored){
-
-            if (scoreButton.getStrategyType() == previouslySelectedScore) {
-                scoreButton.setP1ScoreValue(null);
-                refreshList();
-                hasPlayerSelectedScored = false;
-                playButton.setEnabled(false);
-                return;
-            }}
     }
 
 }
